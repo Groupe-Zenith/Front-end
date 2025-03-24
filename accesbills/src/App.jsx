@@ -9,15 +9,15 @@ function App() {
     <Router>
       <RoutesApplication />
     </Router>
-    <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<p>Hello</p>} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/user" element={<MainUserPage />} />
-        </Routes>
-      </Router>
-    </>
+    // <>
+    //   <Router>
+    //     <Routes>
+    //       <Route path="/" element={<p>Hello</p>} />
+    //       <Route path="/login" element={<LoginPage />} />
+    //       <Route path="/user" element={<MainUserPage />} />
+    //     </Routes>
+    //   </Router>
+    // </>
   );
 }
 
