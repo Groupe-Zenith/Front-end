@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import './themeToggle.scss';
-
+import React, { useContext } from "react";
+import { ThemeContext } from "../../../contexts/themeContext";
+import "./themeToggle.scss"; // On va ajouter un style simple
 
 const ThemeToggle = () => {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
-
-  useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
-  }, [darkMode]);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <button 
-      className={`theme-toggle ${darkMode ? 'dark' : 'light'}`}
-      onClick={() => setDarkMode(!darkMode)}
-      aria-label="Toggle theme"
-    >
-      <div className="toggle-circle"></div>
+    <button className="theme-toggle" onClick={toggleTheme}>
+      {theme === "lighttheme" ? "🌙" : "☀️"}
     </button>
   );
 };
