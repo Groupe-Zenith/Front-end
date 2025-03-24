@@ -1,16 +1,23 @@
-@import "../scss/variable.scss";
 
 .Header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  background-color: var(--white-color);
-  color: var(--primary-color);
-  width: 100%;
+  background-color: var(--whiteColor);
+  color: var(--primaryColor);
+  width: 100vw;
   height: 80px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 0 1rem;
+  gap: 3rem;
 
+  
+.search-container {
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+}
   @media (max-width: 768px) {
     flex-direction: column;
     height: auto;
@@ -19,22 +26,11 @@
   }
 }
 
-.search-container {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 500px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-}
 
 .search-input {
-  color: var(--primary-color);
-  width: 100%;
+  color: var(--primaryColor);
+  position: relative;
+  width: 30rem;
   padding: 0.75rem;
   border-radius: 25px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -43,12 +39,13 @@
   font-size: 1rem;
   transition: all 0.1s ease-in-out;
 
+  
   &:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 1px 4px var(--primary-color);
+    border-color: var(--primaryColor);
+    box-shadow: 0 1px 4px var(--primaryColor);
     transform: scale(1.02);
   }
-
+  
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -74,7 +71,7 @@
   background: none;
   border: none;
   font-weight: 800;
-  color: var(--primary-color);
+  color: var(--primaryColor);
   cursor: pointer;
   padding: 10px 15px;
   display: flex;
@@ -86,7 +83,7 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background: var(--white-color);
+  background: var(--whiteColor);
   border-radius: 20px;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -94,7 +91,7 @@
   font-size: 14px;
   margin: 0;
   padding: 5px 0;
-  z-index: 1000;
+  z-index: 5000;
   min-width: 150px;
 }
 
@@ -104,7 +101,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 10px;  
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
@@ -125,5 +122,5 @@
 
 .user-icon, .logout-icon {
   font-size: 1.5rem;
-  color: var(--primary-color);
+  color: var(--primaryColor);
 }

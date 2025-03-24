@@ -3,7 +3,7 @@ import mlgFlag from "../../../../assets/images/.jpeg/mlgFlag.jpeg";
 import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { LuLogOut, LuUser } from "react-icons/lu";
-import "./adminHeader.scss";
+import "./adminHeader.scss"
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
