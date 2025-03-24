@@ -1,0 +1,118 @@
+.navbar {
+    background: var(--whiteColor);
+    border-bottom: 1px solid var(--greyColor);
+    font-family: var(--DefaultFont);
+  
+    .navbar-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+  
+    .brand {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--thirdColor);
+      
+      .icon {
+        margin-right: 0.5rem;
+        color: var(--primaryColor);
+      }
+    }
+  
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      
+      .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        color: var(--darkFontColor);
+        transition: background 0.3s;
+  
+        &:hover {
+          background: var(--hoverColor);
+        }
+      }
+    }
+  
+    .user-menu {
+      position: relative;
+      
+      .user-icon {
+        cursor: pointer;
+        color: var(--primaryColor);
+      }
+  
+      .dropdown {
+        display: none;
+        position: absolute;
+        right: 0;
+        background: var(--whiteColor);
+        box-shadow: 0px 4px 6px var(--darkColorTransparent);
+        border-radius: 5px;
+        padding: 0.5rem;
+        
+        .dropdown-item {
+          display: flex;
+          align-items: center;
+          padding: 0.5rem;
+          color: var(--darkFontColor);
+          transition: background 0.3s;
+  
+          &:hover {
+            background: var(--hoverColor);
+          }
+        }
+      }
+      &:hover .dropdown {
+        display: block;
+      }
+    }
+  
+    .menu-button {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--thirdColor);
+      
+      .icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--backgroundColor);
+      padding: 1rem;
+      border-radius: 5px;
+  
+      .nav-item {
+        padding: 0.5rem 1rem;
+        color: var(--darkFontColor);
+      }
+    }
+  
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .menu-button {
+        display: block;
+      }
+      .mobile-menu {
+        display: flex;
+      }
+    }
+  }
+  
