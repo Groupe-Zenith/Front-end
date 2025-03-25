@@ -110,6 +110,7 @@
     color: #d1fae5;
   }
 }
+
 .login-container {
   padding: 2rem;
   display: flex;
@@ -347,11 +348,104 @@
   }
 }
 
+.otp-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  @media (min-width: 768px) {
+    padding: 3rem;
+    width: 50%;
+  }
+
+  .form-wrapper {
+    max-width: 30rem;
+    width: 100%;
+    align-items: center;
+
+
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primaryColor);
+      margin-bottom: 0.5rem;
+      justify-content: center;
+    }
+
+    .subtitle {
+      color: var(--disabledColor);
+      margin-bottom: 2rem;
+    }
+
+    .otp-form input,
+    .otp-form textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .OTP-buttons {
+      width: 100%;
+      background: #5dc0dc;
+      cursor: pointer;
+      color: white;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+
+      &:hover {
+        background: #4db3cf;
+      }
+
+      .ripple-effect {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: black;
+        opacity: 0;
+      }
+
+      .spinner {
+        width: 1.25rem;
+        height: 1.25rem;
+        animation: spin 1s linear infinite;
+
+        .spinner-circle {
+          opacity: 0.25;
+        }
+
+        .spinner-path {
+          opacity: 0.75;
+        }
+      }
+
+      .button-icon {
+        margin-left: 0.5rem;
+      }
+
+    }
+  }
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
+
 .page-container {
   min-height: 100vh;
   background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);

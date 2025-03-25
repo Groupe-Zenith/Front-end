@@ -4,7 +4,6 @@ import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { IoNotifications } from "react-icons/io5";
-import LogoutModal from "../../../../components/admin/Modal/Modal";
 import "./adminHeader.scss"
 import { Link } from "react-router-dom";
 
@@ -113,11 +112,7 @@ const Header = () => {
            onClick={handleLogoutClick} />
         </div>
       </div>
-      <LogoutModal
-        visible={modalVisible}
-        onCancel={handleCancel}
-        onConfirm={handleConfirmLogout}
-      />
+      
     </div>
   );
 };
