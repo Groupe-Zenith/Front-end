@@ -81,6 +81,7 @@
 
     .text-logo {
       font-size: 20px;
+      font-weight: bold;
       cursor: pointer;
       color: var(--primaryColor);
     }
@@ -95,7 +96,7 @@
       background-color: transparent;
       .io-menu {
         color: var(--primaryColor);
-        font-size: 30px;
+        font-size: 20px;
       }
     }
   }
@@ -116,8 +117,8 @@
     .menu-item {
       width: 80%;
       display: flex;
-      flex-direction: row; /* Utiliser row pour aligner horizontalement */
-      align-items: center; /* Centrer verticalement */
+      flex-direction: row;
+      align-items: center; 
       padding: 0.5rem;
       border-radius: 20px;
       transition: all 0.25s ease-in-out;
@@ -129,7 +130,7 @@
         align-items: center;
         justify-content: flex-start;
         width: 100%;
-        height: 3rem;
+        height: 2rem;
         color: var(--primaryColor);
         text-decoration: none;
         transition: color 0.02s ease-in-out;

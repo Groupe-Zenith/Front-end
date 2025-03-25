@@ -4,16 +4,16 @@ import Chart from "../../../../../components/admin/Chart/Chart";
 import "./Dashboard.scss";
 
 const dashboardData = [
-    { title: "User account", value: 200 },
-    { title: "Purchase count", value: 150 },
-    { title: "Request count", value: 80 }
+    { title: "Nombre d'utilisateur", value: 200 },
+    { title: "Nombre d'achat", value: 150 },
+    { title: "Nombre de demande", value: 80 }
 ];
 
 const lineData = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun" ,"Jul" , "Aout" , "Sept" , "Oct" , "Nov" , "Dec"],
     datasets: [
       {
-        label: "Purchase",
+        label: "Achats",
         data: [45, 56, 67, 83, 90, 100 , 23, 40, 60, 12, 70, 54],
         fill: false,
         borderColor: "#5DC0DC",

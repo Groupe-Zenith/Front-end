@@ -6,7 +6,6 @@ const ThemeToggle = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Vérifier le thème au chargement
     const isDark = document.documentElement.classList.contains('darktheme');
     setDarkMode(isDark);
   }, []);

@@ -1,6 +1,6 @@
 import React from "react";
 import DataTable from "../../../../../components/common/dataTabs/DataTable"; 
-
+import "./Employee.scss";
 const columns = [
   { key: "badgeNumber", label: "Badge Number" },
   { key: "firstName", label: "Name" },
@@ -39,7 +39,7 @@ const handleActionClick = () => {
 
 const EmployeeList = () => {
   return (
-    <div>
+    <div className="Employee">
       <DataTable
         title="Employee List"
         description="List of users with their details"

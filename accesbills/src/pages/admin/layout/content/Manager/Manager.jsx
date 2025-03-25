@@ -39,7 +39,7 @@ const handleActionClick = () => {
 
 const ManagerList = () => {
   return (
-    <div>
+    <div className="Manager">
       <DataTable
         title="Manager List"
         description="List of managers with their details"

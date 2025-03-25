@@ -31,18 +31,19 @@
   color: var(--primaryColor);
   position: relative;
   width: 30rem;
+  height: 40px;
   padding: 0.75rem;
   border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   outline: none;
-  font-size: 1rem;
+  font-size: 0.85rem;
   transition: all 0.1s ease-in-out;
 
   
   &:focus {
     border-color: var(--primaryColor);
-    box-shadow: 0 1px 4px var(--primaryColor);
+    box-shadow: 0 0px 2px var(--primaryColor);
     transform: scale(1.02);
   }
   
@@ -116,21 +117,19 @@
 .user-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1.5rem;
   cursor: pointer;
 }
-
-.user-icon, .logout-icon {
+.user-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  background-color: var(--primaryColor);
-  color: var(--whiteColor);
+  width: 20px; /* Augmenter la taille du cercle */
+  height: 20px;
+  color: var(--primaryColor);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
-  
-  
+  font-size: 4px; 
 }
