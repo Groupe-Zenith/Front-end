@@ -1,5 +1,3 @@
-"use client"
-
 import DataTable from '../../../../../components/common/dataTabs/DataTable'
 import './PurchaseRequestsTab.scss';
 
