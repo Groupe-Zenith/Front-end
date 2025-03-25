@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Bell,TableOfContents, Menu, Package, Settings, User, X } from "lucide-react";
+import { Bell, TableOfContents, Menu, Package, Settings, User, X } from "lucide-react";
 import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import "./UserNavbar.scss";
 
 export default function UserNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true);
+
+  const handleNotificationClick = () => {
+    setHasUnreadNotifications(false); 
+  };
 
   return (
     <nav className="navbar">
@@ -18,10 +22,11 @@ export default function UserNavbar() {
 
         <div className="desktop-controls">
           <ThemeToggle />
-          <div className="notification-icon">
+          <Link to="/notifications" className="notification-icon" onClick={handleNotificationClick}>
             <Bell className="icon" />
             {hasUnreadNotifications && <span className="notification-badge"></span>}
-          </div>
+          </Link>
+
           <div className="user-menu">
             <div className="user-icon">
               <User className="icon" />
@@ -41,9 +46,10 @@ export default function UserNavbar() {
             </div>
           </div>
         </div>
+
         <button className="menu-button" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X className="icon" /> : <Menu className="icon" />}
-        </button>    
+        </button>
       </div>
     </nav>
   );
