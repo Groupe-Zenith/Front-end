@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Bell, Clock, FileText, Menu, Package, Settings, User, X } from "lucide-react";
+import { Bell,TableOfContents, Menu, Package, Settings, User, X } from "lucide-react";
 import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import "./UserNavbar.scss";
 
@@ -17,16 +17,11 @@ export default function UserNavbar() {
         </div>
 
         <div className="desktop-controls">
-          {/* Ajout du ThemeToggle */}
           <ThemeToggle />
-
-          {/* Icône de notification */}
           <div className="notification-icon">
             <Bell className="icon" />
             {hasUnreadNotifications && <span className="notification-badge"></span>}
           </div>
-
-          {/* Menu utilisateur */}
           <div className="user-menu">
             <div className="user-icon">
               <User className="icon" />
@@ -38,35 +33,17 @@ export default function UserNavbar() {
               <Link to="/profile" className="dropdown-item">
                 <User className="icon" /> Profile
               </Link>
-              <Link to="/settings" className="dropdown-item">
-                <Settings className="icon" /> Parametre
+              <Link to="/user" className="dropdown-item">
+                <TableOfContents className="icon" />Contenue
               </Link>
               <hr />
               <button className="dropdown-item logout">Deconnexion</button>
             </div>
           </div>
         </div>
-
-        {/* Mobile Menu Button */}
         <button className="menu-button" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X className="icon" /> : <Menu className="icon" />}
-        </button>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="mobile-menu">
-            <ThemeToggle className="mobile-theme-toggle" />
-            <Link to="/history" className="nav-item" onClick={() => setIsMobileMenuOpen(false)}>
-              <Clock className="icon" /> Historique
-            </Link>
-            <Link to="/purchase-requests" className="nav-item" onClick={() => setIsMobileMenuOpen(false)}>
-              <FileText className="icon" /> Demande d'achat 
-            </Link>
-            <Link to="/equipment-reports" className="nav-item" onClick={() => setIsMobileMenuOpen(false)}>
-              <Package className="icon" /> Signalement d'equipment
-            </Link>
-          </div>
-        )}
+        </button>    
       </div>
     </nav>
   );
