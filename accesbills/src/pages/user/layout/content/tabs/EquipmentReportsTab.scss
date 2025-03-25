@@ -1,189 +1,64 @@
 .equipment-reports {
-  border: 1px solid var(--greyColor);
-  border-radius: 0.5rem;
   background-color: var(--whiteColor);
-  box-shadow: 0 1px 2px 0 var(--darkColorTransparent);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px var(--darkColorTransparent);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
-  .reports-header {
-    border-bottom: 1px solid var(--greyColor);
-    padding: 1.5rem;
+.search-header {
+  padding: 1rem 1.5rem;
+  background-color: var(--fillInput);
+  border-bottom: 1px solid var(--greyColor);
+}
 
-    h3 {
-      font-size: 1.125rem;
-      line-height: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      color: var(--darkFontColor);
-      font-family: var(--TitleFont);
-    }
+.search-container {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
 
-    p {
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-      color: var(--lightFontColor);
-      font-family: var(--DefaultFont);
+  .search-input {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid var(--greyColor);
+    border-radius: 0.375rem;
+    font-family: var(--DefaultFont);
+    background-color: var(--whiteColor);
+    color: var(--darkFontColor);
+    font-size: 0.875rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primaryColor);
+      box-shadow: 0 0 0 2px rgba(var(--primaryColor), 0.1);
     }
   }
 
-  .reports-content {
-    padding: 1.5rem;
-
-    .reports-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      gap: 1rem;
-
-      .search-container {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-
-        .search-input {
-          max-width: 24rem;
-          border: 1px solid var(--greyColor);
-          border-radius: 0.375rem;
-          padding: 0.5rem 0.75rem;
-          font-size: 0.875rem;
-          line-height: 1.25rem;
-          width: 100%;
-          background-color: var(--fillInput);
-          color: var(--darkFontColor);
-          font-family: var(--DefaultFont);
-        }
-
-        .search-button {
-          padding: 0.5rem;
-          border: 1px solid var(--greyColor);
-          border-radius: 0.375rem;
-          background-color: var(--fillInput);
-          color: var(--lightFontColor);
-          
-          &:hover {
-            background-color: var(--hoverColor);
-          }
-
-          .search-icon {
-            height: 1rem;
-            width: 1rem;
-          }
-        }
-      }
-
-      .generate-button {
-        padding: 0.5rem 1rem;
-        background-color: var(--primaryColor);
-        color: var(--whiteColor);
-        border-radius: 0.375rem;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        font-family: var(--DefaultFont);
-        border: none;
-        cursor: pointer;
-        
-        &:hover {
-          background-color: var(--thirdColor);
-        }
-      }
-    }
-
-    .reports-grid {
-      display: grid;
-      gap: 1rem;
-
-      @media (min-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      @media (min-width: 1024px) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .report-card {
-        border: 1px solid var(--greyColor);
-        border-radius: 0.5rem;
-        padding: 1rem;
-        transition: box-shadow 0.2s ease;
-        background-color: var(--whiteColor);
-
-        &:hover {
-          box-shadow: 0 4px 6px -1px var(--darkColorTransparent);
-        }
-
-        .card-header {
-          padding-bottom: 0.5rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-
-          h4 {
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-            font-weight: 500;
-            color: var(--darkFontColor);
-            font-family: var(--DefaultFont);
-          }
-        }
-
-        .card-content {
-          p {
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-            color: var(--lightFontColor);
-            font-family: var(--DefaultFont);
-            margin-bottom: 0.5rem;
-            
-            strong {
-              color: var(--darkFontColor);
-              font-weight: 600;
-            }
-          }
-
-          .report-date {
-            font-size: 0.75rem;
-            line-height: 1rem;
-            color: var(--lightFontColor);
-          }
-
-          .view-button {
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-            color: var(--primaryColor);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: var(--DefaultFont);
-            padding: 0;
-            
-            &:hover {
-              color: var(--thirdColor);
-              text-decoration: underline;
-            }
-          }
-        }
-      }
-    }
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--lightFontColor);
+    width: 1rem;
+    height: 1rem;
   }
 }
 
-.status-badge {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-family: var(--DefaultFont);
-  font-weight: 500;
+.inventory-section {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
 
-  &.status-pending {
-    background-color: rgba(var(--warningColor), 0.1);
-    color: var(--warningColor);
+@media (max-width: 768px) {
+  .search-header {
+    padding: 0.75rem;
   }
 
-  &.status-resolved {
-    background-color: rgba(var(--succesColor), 0.1);
-    color: var(--succesColor);
+  .inventory-section {
+    padding: 1rem;
   }
 }
