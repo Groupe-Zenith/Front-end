@@ -3,26 +3,51 @@ import { motion } from "framer-motion";
 import "./Auth.scss";
 import { Lock, Mail, ChevronRight, Shield, Code, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
+import { handleSignup } from "../../services/ApiUser";
+import { toast } from "sonner"
+import { Toaster } from "sonner";
 
-
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState("");
+  const [name , setName] = useState("");
+  const [lastName , setlastName] = useState("");
+  const [role, setRole] = useState("");
   const [scan, setScan] = useState(false);
   const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
+    if (!email || !password || !name || !lastName || !role) {
+      setIsLoading(false);
+      return;
+    }
+    else if (password.length < 6) {
+      setIsLoading(false);
+      toast.warning("Le mot de passe est trop court. Merci de reessayer")
+    }
+    else if (password !== confirmPassword) {
+      setIsLoading(false);
+      toast.warning("Les mots de passe ne correspondent pas. Merci de reessayer")
+    }
+   else {
+      handleSignup({ email, password, first_name: name, last_name: lastName, role })
+        .then((data) => {
+            if (data.success) {
+            toast.success(data.message);
+            setScan(true);
+            } else {
+            toast.error(data.message);
+            }
+            setIsLoading(false);
+        })
 
-    console.log(email, password);
-
-    // Simuler une requête d'authentification
     setTimeout(() => {
       setIsLoading(false);
-      // Rediriger ou afficher un message de succès
     }, 1500);
-  };
+  };}
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -60,13 +85,14 @@ const Login = () => {
   };
 
   const features = [
-    { icon: <Code size={20} />, text: "API des services d'achats" },
-    { icon: <Shield size={20} />, text: "Conformité & protection des données" },
-    { icon: <FileText size={20} />, text: "Facilitation  des gestions" },
+      { icon: <Code size={20} />, text: "API des services d'achats" },
+        { icon: <Shield size={20} />, text: "Conformité & protection des données" },
+        { icon: <FileText size={20} />, text: "Facilitation  des gestions" },
   ];
 
   return (
     <div className="page-container">
+        <Toaster/>
       {/* Container principal */}
       <motion.div
         className="main-card"
@@ -107,7 +133,7 @@ const Login = () => {
               <h1>Access-Bills</h1>
             </div>
             <motion.h2 variants={fadeInUp} initial="hidden" animate="visible">
-              For Company
+            For Company
             </motion.h2>
             <motion.p
               variants={fadeInUp}
@@ -115,8 +141,8 @@ const Login = () => {
               animate="visible"
               transition={{ delay: 0.2 }}
             >
-              Portail exclusif de gestion au sein des entreprises pour
-              des achats des biens communs 
+             Portail exclusif de gestion au sein des entreprises pour
+             des achats des biens communs 
             </motion.p>
           </motion.div>
 
@@ -130,7 +156,7 @@ const Login = () => {
               className="features"
             >
               <motion.p variants={itemVariants} className="features-title">
-                Avantages et maintenabilite
+              Avantages et maintenabilite
               </motion.p>
 
               {features.map((feature, index) => (
@@ -153,8 +179,7 @@ const Login = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.8 }}
-          >
-            © 2025 Access-Bills. Tous droits réservés.
+          >    © 2025 Access-Bills. Tous droits réservés.
           </motion.div>
         </motion.div>
 
@@ -171,8 +196,8 @@ const Login = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              <h2 className="title">Connexion</h2>
-              <p className="subtitle">Accédez à votre espace API et services</p>
+              <h2 className="title">Inscription</h2>
+              <p className="subtitle">Accédez à votre espace API et services sur les achats</p>
             </motion.div>
 
             <form onSubmit={handleSubmit}>
@@ -207,20 +232,57 @@ const Login = () => {
                     />
                   </div>
                 </motion.div>
+                <motion.div variants={itemVariants} className="field">
+                  <label htmlFor="name" className="label">
+                    Nom complet
+                  </label>
+                  <div className="input-wrapper">
+                    <input
+                      id="name"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="input"
+                      placeholder="votre nom"
+                      required
+                    />
+                    <motion.div
+                      className="input-focus-line"
+                      initial={{ width: 0 }}
+                      whileFocus={{ width: "100%" }}
+                      transition={{ duration: 0.2 }}
+                    />
+                  </div>
+                </motion.div>
+
+                <motion.div variants={itemVariants} className="field">
+                  <label htmlFor="name" className="label">
+                   Votre prenom
+                  </label>
+                  <div className="input-wrapper">
+                    <input
+                      id="lname"
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setlastName(e.target.value)}
+                      className="input"
+                      placeholder="votre prenom"
+                      required
+                    />
+                    <motion.div
+                      className="input-focus-line"
+                      initial={{ width: 0 }}
+                      whileFocus={{ width: "100%" }}
+                      transition={{ duration: 0.2 }}
+                    />
+                  </div>
+                </motion.div>
 
                 <motion.div variants={itemVariants} className="field">
                   <div className="password-header">
                     <label htmlFor="password" className="label">
                       Mot de passe
                     </label>
-                    <motion.a
-                      href="#"
-                      className="forgot-password"
-                      whileHover={{ x: 2 }}
-                      transition={{ type: "spring", stiffness: 400 }}
-                    >
-                      Mot de passe oublié?
-                    </motion.a>
                   </div>
                   <div className="input-wrapper">
                     <div className="input-icon">
@@ -234,6 +296,53 @@ const Login = () => {
                       className="input"
                       placeholder="••••••••••"
                       required
+                    />
+                  </div>
+                </motion.div>
+
+                <motion.div variants={itemVariants} className="field">
+                  <div className="password-header">
+                    <label htmlFor="password" className="label">
+                      Confirmer votre mot de passe
+                    </label>
+                  </div>
+                  <div className="input-wrapper">
+                    <div className="input-icon">
+                      <Lock size={18} />
+                    </div>
+                    <input
+                      id="confirmpassword"
+                      type="password"
+                      value={confirmPassword}
+                      onChange={(e) => setconfirmPassword(e.target.value)}
+                      className="input"
+                      placeholder="••••••••••"
+                      required
+                    />
+                  </div>
+                </motion.div>
+                <motion.div variants={itemVariants} className="field">
+                  <label htmlFor="role" className="label">
+                    Rôle
+                  </label>
+                  <div className="input-wrapper">
+                    <select
+                      id="role"
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
+                      className="input"
+                      required
+                    >
+                      <option value="">Sélectionnez votre rôle</option>
+                      <option value="user">Employee utilisateur</option>
+                      <option value="manager">Manager</option>
+                      <option value="admin">Administrateur</option>
+                    </select>
+                    <motion.div
+                      className="input-focus-line"
+                      initial={{ width: 0 }}
+                      whileFocus={{ width: "100%" }}
+                      transition={{ duration: 0.2 }}
                     />
                   </div>
                 </motion.div>
@@ -275,7 +384,7 @@ const Login = () => {
                       </svg>
                     ) : (
                       <>
-                        <span>Se connecter</span>
+                        <span>S'inscrire</span>
                         <ChevronRight size={18} className="button-icon" />
                       </>
                     )}
@@ -290,11 +399,11 @@ const Login = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.6 }}
             >
-              <Link to="/signup">
-              <p className="signup-text">
-                Pas encore de compte?
-              </p>
-              </Link>
+                <Link to="/login">
+                <p className="signup-text">
+                    Deja un compte?
+                </p>
+                </Link>
             </motion.div>
           </div>
         </motion.div>
@@ -303,4 +412,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
