@@ -3,6 +3,7 @@ import mlgFlag from "../../../../assets/images/.jpeg/mlgFlag.jpeg";
 import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { LuLogOut, LuUser } from "react-icons/lu";
+import { IoNotifications } from "react-icons/io5";
 import "./adminHeader.scss"
 
 const Header = () => {
@@ -89,9 +90,8 @@ const Header = () => {
         </div>
 
         <div className="user-actions">
-          <div className="user-info">
             <LuUser className="user-icon" />
-          </div>
+            <IoNotifications className="user-icon"/>
           <LuLogOut className="logout-icon" />
         </div>
       </div>

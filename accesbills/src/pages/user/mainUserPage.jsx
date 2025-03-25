@@ -1,10 +1,10 @@
 import React from 'react'
 import UserLayout from './layout/userLayout'
 
-function mainUserPage() {
+function MainUserPage() {
   return (
     <UserLayout/>
   )
 }
 
-export default mainUserPage
+export default MainUserPage
