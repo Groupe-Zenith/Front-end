@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { handleSignup } from "../../services/ApiUser";
 import { toast } from "sonner"
 import { Toaster } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const Navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +45,8 @@ const Signup = () => {
             }
             setIsLoading(false);
         })
-
+        localStorage.setItem("Information user", JSON.stringify({ email, name, lastName, role }));
+        Navigate("/otp-verification")
     setTimeout(() => {
       setIsLoading(false);
     }, 1500);

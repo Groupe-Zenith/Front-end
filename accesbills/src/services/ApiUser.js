@@ -16,10 +16,9 @@ export const handleSignup = async ({email, password, first_name, last_name , rol
     }
 
 }
-export const handleOTP = async ({ email, otp }) => {
+export const handleOTP = async ({ otp }) => {
     try{
-        const response = await axios.post("http://192.168.1.105:5000/auth/verify", {
-            email,
+        const response = await axios.post("http://192.168.1.105:5000/auth/verify-email", {
             otp
         });
         return response.data;
