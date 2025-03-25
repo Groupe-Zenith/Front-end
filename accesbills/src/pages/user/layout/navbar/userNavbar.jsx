@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Clock, FileText, Menu, Package, Settings, User, X } from "lucide-react";
-
+import { Bell, Clock, FileText, Menu, Package, Settings, User, X } from "lucide-react";
 import "./UserNavbar.scss";
 
 export default function UserNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true); // État pour les notifications non lues
 
   return (
     <nav className="navbar">
@@ -15,38 +15,32 @@ export default function UserNavbar() {
           <span>AccesBills</span>
         </div>
 
-        <div className="nav-links">
-          <Link to="/history" className="nav-item">
-            <Clock className="icon" />
-            Historique
-          </Link>
-          <Link to="/purchase-requests" className="nav-item">
-            <FileText className="icon" />
-            Demande d'achat
-          </Link>
-          <Link to="/equipment-reports" className="nav-item">
-            <Package className="icon" />
-            Signalement d'equipment
-          </Link>
-        </div>
-
-        {/* User Menu mbola asina back */}
-        <div className="user-menu">
-          <div className="user-icon">
-            <User className="icon" />
+        {/* User Menu avec notification */}
+        <div className="user-menu-wrapper">
+          {/* Icône de notification */}
+          <div className="notification-icon">
+            <Bell className="icon" />
+            {hasUnreadNotifications && <span className="notification-badge"></span>}
           </div>
-          <div className="dropdown">
-            <p className="user-name">Mumu</p>
-            <p className="user-email">muriella@example.com</p>
-            <hr />
-            <Link to="/profile" className="dropdown-item">
-              <User className="icon" /> Profile
-            </Link>
-            <Link to="/settings" className="dropdown-item">
-              <Settings className="icon" /> Parametre
-            </Link>
-            <hr />
-            <button className="dropdown-item logout">Deconnexion</button>
+
+          {/* Menu utilisateur */}
+          <div className="user-menu">
+            <div className="user-icon">
+              <User className="icon" />
+            </div>
+            <div className="dropdown">
+              <p className="user-name">Mumu</p>
+              <p className="user-email">muriella@example.com</p>
+              <hr />
+              <Link to="/profile" className="dropdown-item">
+                <User className="icon" /> Profile
+              </Link>
+              <Link to="/settings" className="dropdown-item">
+                <Settings className="icon" /> Parametre
+              </Link>
+              <hr />
+              <button className="dropdown-item logout">Deconnexion</button>
+            </div>
           </div>
         </div>
 

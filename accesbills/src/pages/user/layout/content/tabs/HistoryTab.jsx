@@ -5,23 +5,43 @@ import "./HistoryTab.scss"
 
 export default function HistoryTab() {
   const historyItems = [
-    { date: "2023-05-12", activity: "Viewed Report", section: "Equipment Reports", details: "Annual Inventory Report" },
-    { date: "2023-05-10", activity: "Created Request", section: "Purchase Requests", details: "Office Supplies Order #1234" },
-    { date: "2023-05-08", activity: "Updated Profile", section: "User Settings", details: "Changed department information" },
-    { date: "2023-05-05", activity: "Viewed Report", section: "Equipment Reports", details: "Q1 Equipment Usage" }
+    { 
+      date: "2023-05-15", 
+      activity: "Signalement créé", 
+      section: "Équipements", 
+      details: "Signalement #ER-2023-004 - Souris défectueuse" 
+    },
+    { 
+      date: "2023-05-12", 
+      activity: "Demande d'achat", 
+      section: "Achats", 
+      details: "Demande #PR-2023-005 - Nouveau clavier" 
+    },
+    { 
+      date: "2023-05-10", 
+      activity: "Signalement mis à jour", 
+      section: "Équipements", 
+      details: "Signalement #ER-2023-002 résolu" 
+    },
+    { 
+      date: "2023-05-08", 
+      activity: "Profil modifié", 
+      section: "Compte", 
+      details: "Mise à jour des informations personnelles" 
+    }
   ];
 
   return (
     <div className="history-container">
       <div className="history-header">
-        <h3>Historique de Navigation</h3>
-        <p>Activite de navigation recente </p>
+        <h3>Historique des Activités</h3>
+        <p>Vos actions récentes sur la plateforme</p>
       </div>
       <div className="history-content">
         <div className="history-controls">
           <div className="search-wrapper">
             <input 
-              placeholder="Chercher Historique..." 
+              placeholder="Rechercher dans l'historique..." 
               className="search-input"
             />
             <button className="search-button">
@@ -35,9 +55,9 @@ export default function HistoryTab() {
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Activite</th>
+                <th>Activité</th>
                 <th>Section</th>
-                <th>Details</th>
+                <th>Détails</th>
               </tr>
             </thead>
             <tbody>

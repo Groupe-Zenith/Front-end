@@ -5,22 +5,43 @@ import "./EquipmentReportsTab.scss"
 
 export default function EquipmentReportsTab() {
   const reports = [
-    { title: "Annual Inventory", value: "243 items", date: "May 12, 2023" },
-    { title: "Q1 Equipment Usage", value: "87% utilization", date: "May 5, 2023" },
-    { title: "Maintenance Schedule", value: "12 upcoming", date: "May 1, 2023" }
+    { 
+      id: "ER-2023-001", 
+      equipment_id: "EQ-1001", 
+      issue_type: "Panne", 
+      description: "Écran ne s'allume plus", 
+      status: "En attente",
+      created_at: "2023-05-12"
+    },
+    { 
+      id: "ER-2023-002", 
+      equipment_id: "EQ-2045", 
+      issue_type: "Maintenance", 
+      description: "Clavier défectueux", 
+      status: "Résolu",
+      created_at: "2023-05-10"
+    },
+    { 
+      id: "ER-2023-003", 
+      equipment_id: "EQ-3012", 
+      issue_type: "Panne", 
+      description: "Souris sans fil ne fonctionne plus", 
+      status: "En attente",
+      created_at: "2023-05-08"
+    }
   ];
 
   return (
     <div className="equipment-reports">
       <div className="reports-header">
-        <h3>Signalement d'equipement</h3>
-        <p>Afficher et générer des rapports sur l'inventaire et l'utilisation des équipements.</p>
+        <h3>Signalement d'équipement</h3>
+        <p>Liste de vos signalements d'équipements défectueux ou en panne.</p>
       </div>
       <div className="reports-content">
         <div className="reports-controls">
           <div className="search-container">
             <input 
-              placeholder="recherche..." 
+              placeholder="Rechercher un signalement..." 
               className="search-input"
             />
             <button className="search-button">
@@ -28,7 +49,7 @@ export default function EquipmentReportsTab() {
             </button>
           </div>
           <button className="generate-button">
-            Signaler un equipement
+            Nouveau signalement
           </button>
         </div>
         
@@ -36,12 +57,17 @@ export default function EquipmentReportsTab() {
           {reports.map((report, index) => (
             <div key={index} className="report-card">
               <div className="card-header">
-                <h4>{report.title}</h4>
+                <h4>Signalement #{report.id}</h4>
+                <span className={`status-badge ${report.status === "Résolu" ? "status-resolved" : "status-pending"}`}>
+                  {report.status}
+                </span>
               </div>
               <div className="card-content">
-                <div className="report-value">{report.value}</div>
-                <p className="report-date">Last updated: {report.date}</p>
-                <button className="view-button">View Report</button>
+                <p><strong>Équipement:</strong> {report.equipment_id}</p>
+                <p><strong>Type de problème:</strong> {report.issue_type}</p>
+                <p><strong>Description:</strong> {report.description}</p>
+                <p className="report-date">Date: {report.created_at}</p>
+                <button className="view-button">Voir détails</button>
               </div>
             </div>
           ))}
