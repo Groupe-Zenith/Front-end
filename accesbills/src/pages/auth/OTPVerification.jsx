@@ -4,12 +4,15 @@ import { Input } from "antd";
 import { toast } from "sonner"
 import { Toaster } from "sonner";
 import { ChevronRight, Shield, Code, FileText } from "lucide-react";
+import { handleOTP } from "../../services/ApiUser";
+import { useNavigate } from "react-router-dom";
 import "./Auth.scss";
 
 const OTPVerification = () => {
     const [otp, setOtp] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const Navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +25,16 @@ const OTPVerification = () => {
             toast.warning("Veuillez complétez l'otp a 6 chiffres")
         }
         else {
-            setErrorMessage("Le code OTP doit contenir 6 chiffres.");
+           handleOTP({ otp })
+            .then((response) => {
+                toast.success("Le code OTP est valide.")
+                console.log(response);
+            })
+            .catch((error) => {
+                toast.error("Le code OTP est invalide.")
+                console.log(error);
+            });
+            Navigate("/login")
         }
         setErrorMessage("");
         console.log("Code OTP soumis:", otp);

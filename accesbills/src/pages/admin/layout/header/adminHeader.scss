@@ -121,6 +121,16 @@
 }
 
 .user-icon, .logout-icon {
-  font-size: 1.5rem;
-  color: var(--primaryColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: var(--primaryColor);
+  color: var(--whiteColor);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  
 }

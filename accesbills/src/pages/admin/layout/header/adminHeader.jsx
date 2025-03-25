@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import mlgFlag from "../../../../assets/images/.jpeg/mlgFlag.jpeg";
 import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
-import { LuLogOut, LuUser } from "react-icons/lu";
-import { IoNotifications } from "react-icons/io5";
+import { Bell, User, LucideLogOut } from "lucide-react";
 import "./adminHeader.scss"
 import { Link } from "react-router-dom";
 
@@ -105,9 +104,9 @@ const Header = () => {
         </div>
 
         <div className="user-actions">
-            <LuUser className="user-icon" />
-            <IoNotifications className="user-icon"/>
-          <LuLogOut
+            <User className="user-icon" />
+            <Bell className="user-icon"/>
+          <LucideLogOut
            className="logout-icon" 
            onClick={handleLogoutClick} />
         </div>

@@ -18,9 +18,9 @@ const AdminPage = () => {
             <div className="main-content">
                 <DashboardContent>
                     <Routes>
-                        <Route path="/" element={<Dashboard />} />
-                        <Route path="/employee-account" element={<EmployeeList />} />
-                        <Route path="/manager-accountt" element={<ManagerList />} />
+                        <Route index element={<Dashboard />} />
+                        <Route path="employee-account" element={<EmployeeList />} />
+                        <Route path="manager-account" element={<ManagerList />} />
                     </Routes>
                 </DashboardContent>
             </div>
