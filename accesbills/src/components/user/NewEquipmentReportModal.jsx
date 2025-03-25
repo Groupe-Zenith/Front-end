@@ -1,20 +1,11 @@
-<<<<<<< HEAD
-import { useState } from 'react';
-=======
 import { useState, useRef } from 'react';
 import { Upload, X } from 'lucide-react';
->>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
 import './NewEquipmentReportModal.scss';
 
 const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
   const [newReport, setNewReport] = useState({
     equipment_id: '',
     issue_type: 'Panne',
-<<<<<<< HEAD
-    description: ''
-  });
-
-=======
     description: '',
     image: null
   });
@@ -22,7 +13,6 @@ const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
   const [previewImage, setPreviewImage] = useState(null);
   const fileInputRef = useRef(null);
 
->>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
   const issueTypes = [
     'Panne',
     'Maintenance',
@@ -39,10 +29,6 @@ const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
     }));
   };
 
-<<<<<<< HEAD
-  const handleSubmit = (e) => {
-    e.preventDefault();
-=======
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -80,19 +66,11 @@ const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
       formData.append('image', newReport.image);
     }
 
->>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
     onSubmit({
       ...newReport,
       status: "En attente",
       created_at: new Date().toISOString().split('T')[0]
     });
-<<<<<<< HEAD
-    setNewReport({
-      equipment_id: '',
-      issue_type: 'Panne',
-      description: ''
-    });
-=======
 
   
     setNewReport({
@@ -102,7 +80,6 @@ const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
       image: null
     });
     setPreviewImage(null);
->>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
   };
 
   if (!isOpen) return null;
@@ -159,8 +136,6 @@ const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
               rows="4"
             />
           </div>
-<<<<<<< HEAD
-=======
 
           <div className="form-group">
             <label htmlFor="image">Justificatif (image optionnelle)</label>
@@ -189,7 +164,6 @@ const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
               )}
             </div>
           </div>
->>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
           
           <div className="modal-actions">
             <button type="button" onClick={onClose} className="cancel-button">
