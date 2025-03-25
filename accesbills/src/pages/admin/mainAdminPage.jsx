@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import DashboardContent from "./layout/content/DashboardContent";
 import SideNav from "./layout/SideNav/SideNav";
 import Header from "./layout/header/adminHeader";
+import Dashboard from "./layout/content/Dashboard/Dashboard";
 import "./mainAdmin.scss";
 
 const AdminPage = () => {
@@ -10,10 +11,12 @@ const AdminPage = () => {
     return (
         <div className={`layout ${collapsed ? "collapsed" : ""}`}>
             <SideNav />
+            <Header />
             <div className="main-content">
-                <Header />
+              
                 <DashboardContent>
                    <Outlet/>
+                    <Dashboard/>
                 </DashboardContent>
             </div>
         </div>
