@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const handleSignup = async ({email, password, first_name, last_name , role}) => {
     try{
-        const response = await axios.post("http://localhost:5000/auth/register", {
+        const response = await axios.post("http://192.168.1.105:5000/auth/register", {
             email,
             password,
             first_name,
@@ -16,9 +16,10 @@ export const handleSignup = async ({email, password, first_name, last_name , rol
     }
 
 }
-export const handleOTP = async ({ otp }) => {
+export const handleOTP = async ({ email, otp }) => {
     try{
-        const response = await axios.post("http://localhost:5000/auth/verify", {
+        const response = await axios.post("http://192.168.1.105:5000/auth/verify", {
+            email,
             otp
         });
         return response.data;
@@ -27,4 +28,3 @@ export const handleOTP = async ({ otp }) => {
         console.log(error)
     }
 }
-

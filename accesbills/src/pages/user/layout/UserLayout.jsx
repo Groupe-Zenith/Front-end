@@ -1,5 +1,5 @@
 import React from 'react'
-import UserNavbar from './navbar/userNavbar'
+import UserNavbar from './navbar/UserNavbar'
 import UserContent from './content/UserContent'
 import './UserLayout.scss'
 

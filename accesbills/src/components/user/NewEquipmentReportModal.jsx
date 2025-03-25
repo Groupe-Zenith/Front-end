@@ -1,13 +1,28 @@
+<<<<<<< HEAD
 import { useState } from 'react';
+=======
+import { useState, useRef } from 'react';
+import { Upload, X } from 'lucide-react';
+>>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
 import './NewEquipmentReportModal.scss';
 
 const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
   const [newReport, setNewReport] = useState({
     equipment_id: '',
     issue_type: 'Panne',
+<<<<<<< HEAD
     description: ''
   });
 
+=======
+    description: '',
+    image: null
+  });
+
+  const [previewImage, setPreviewImage] = useState(null);
+  const fileInputRef = useRef(null);
+
+>>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
   const issueTypes = [
     'Panne',
     'Maintenance',
@@ -24,18 +39,70 @@ const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
     }));
   };
 
+<<<<<<< HEAD
   const handleSubmit = (e) => {
     e.preventDefault();
+=======
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setNewReport(prev => ({
+        ...prev,
+        image: file
+      }));
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setNewReport(prev => ({
+      ...prev,
+      image: null
+    }));
+    setPreviewImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('equipment_id', newReport.equipment_id);
+    formData.append('issue_type', newReport.issue_type);
+    formData.append('description', newReport.description);
+    if (newReport.image) {
+      formData.append('image', newReport.image);
+    }
+
+>>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
     onSubmit({
       ...newReport,
       status: "En attente",
       created_at: new Date().toISOString().split('T')[0]
     });
+<<<<<<< HEAD
     setNewReport({
       equipment_id: '',
       issue_type: 'Panne',
       description: ''
     });
+=======
+
+  
+    setNewReport({
+      equipment_id: '',
+      issue_type: 'Panne',
+      description: '',
+      image: null
+    });
+    setPreviewImage(null);
+>>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
   };
 
   if (!isOpen) return null;
@@ -92,6 +159,37 @@ const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
               rows="4"
             />
           </div>
+<<<<<<< HEAD
+=======
+
+          <div className="form-group">
+            <label htmlFor="image">Justificatif (image optionnelle)</label>
+            <div className="image-upload-container">
+              <label htmlFor="image" className="upload-button">
+                <Upload className="icon" size={16} />
+                <span>{previewImage ? 'Changer l\'image' : 'Ajouter une image'}</span>
+                <input
+                  id="image"
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  ref={fileInputRef}
+                  className="hidden-input"
+                />
+              </label>
+              
+              {previewImage && (
+                <div className="image-preview">
+                  <img src={previewImage} alt="Preview" />
+                  <button type="button" onClick={removeImage} className="remove-image-button">
+                    <X className="icon" size={14} />
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+>>>>>>> ef90b9b0c6b900755044b1efbb5217e089d2400e
           
           <div className="modal-actions">
             <button type="button" onClick={onClose} className="cancel-button">

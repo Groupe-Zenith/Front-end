@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { handleSignup } from "../../services/ApiUser";
 import { toast } from "sonner"
 import { Toaster } from "sonner";
-import ReCAPTCHA from "react-google-recaptcha";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -17,11 +16,6 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [captchaValue, setCaptchaValue] = useState(null);
-
-  const handleCaptcha = (value) => {
-    setCaptchaValue(value); 
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,10 +27,6 @@ const Signup = () => {
     else if (password.length < 6) {
       setIsLoading(false);
       toast.warning("Le mot de passe est trop court. Merci de reessayer")
-    }
-    else if (!captchaValue) {
-      alert("Veuillez valider le reCAPTCHA");
-      return;
     }
     else if (password !== confirmPassword) {
       setIsLoading(false);
@@ -356,10 +346,6 @@ const Signup = () => {
                     />
                   </div>
                 </motion.div>
-                <ReCAPTCHA
-                sitekey="6Lc29S0qAAAAABuR00MS7tL0RgDzvoUyaejbyhrO"
-                onChange={handleCaptcha}
-              />
                 <motion.div variants={itemVariants}>
                   <motion.button
                     type="submit"
