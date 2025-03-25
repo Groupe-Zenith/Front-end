@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const handleSignup = async ({email, password, first_name, last_name , role}) => {
     try{
-        const response = await axios.post("http://192.168.137.1:5000/auth/register", {
+        const response = await axios.post("http://192.168.1.105:5000/auth/register", {
             email,
             password,
             first_name,
@@ -18,7 +18,7 @@ export const handleSignup = async ({email, password, first_name, last_name , rol
 }
 export const handleOTP = async ({ email, otp }) => {
     try{
-        const response = await axios.post("http://192.168.137.1:5000/auth/verify", {
+        const response = await axios.post("http://192.168.1.105:5000/auth/verify", {
             email,
             otp
         });
