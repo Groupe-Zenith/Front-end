@@ -128,3 +128,74 @@
     }
   }
 }
+.hidden-input {
+  display: none;
+}
+
+.image-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background-color: var(--fillInput);
+  border: 1px dashed var(--greyColor);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--darkFontColor);
+  
+  &:hover {
+    border-color: var(--primaryColor);
+    background-color: var(--hoverColor);
+  }
+  
+  .icon {
+    color: var(--primaryColor);
+  }
+}
+
+.image-preview {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  border: 1px solid var(--greyColor);
+  
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .remove-image-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 24px;
+    height: 24px;
+    background-color: var(--dangerColor);
+    color: var(--whiteColor);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    
+    &:hover {
+      background-color: var(--darkdangerColor);
+    }
+    
+    .icon {
+      color: var(--whiteColor);
+    }
+  }
+}
