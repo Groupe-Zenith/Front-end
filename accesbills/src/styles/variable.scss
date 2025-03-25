@@ -1,83 +1,73 @@
 :root {
-  /* principal color */
-  --primaryColor: #9a69c3;
-  --secondaryColor: #101621;
-  --thirdColor: #101621;
+    /* Primary Colors */
+    --primaryColor: #5DC0DC;
+    --secondaryColor: #32A08C;
+    --thirdColor: #1F4E5F;
 
-  --disabledColor: #7f7f7f;
-  --whiteColor: #ffffff;
-  --fillInput: #ffffff;
-  --greyColor: #e9ecf4;
-  --hoverColor: #f8f9fb;
+    --disabledColor: #A0A0A0;
+    --whiteColor: #ffffff;
+    --fillInput: #F0F7F9;
+    --greyColor: #E3E8EB;
+    --hoverColor: rgba(93, 192, 220, 0.1);
 
-  /* background */
-  --backgroundColor: #f4f4f4;
+    /* Background Colors */
+    --backgroundColor: #F8FCFD;
 
-  /* Transparent Color */
-  --whiteColorTransparent: rgba(255, 255, 255, 0.7);
-  --darkColorTransparent: rgba(0, 0, 0, 0.08);
-  --scrollColor: rgba(0, 0, 0, 0.3);
+    /* Transparent Colors */
+    --whiteColorTransparent: rgba(255, 255, 255, 0.7);
+    --darkColorTransparent: rgba(0, 0, 0, 0.08);
+    --scrollColor: rgba(0, 0, 0, 0.3);
 
-  /* Font color */
-  --darkFontColor: #242424;
-  --lightFontColor: #222e43;
-  --lightTitleColor: #0080ff;
+    /* Font Colors */
+    --darkFontColor: #1F2D36;
+    --lightFontColor: #334E57;
 
-  /* Success color */
-  --succesColor: #1b9a22;
-  --darksuccesColor: #26822b;
+    /* Status Colors */
+    --succesColor: #1B9A22;
+    --darksuccesColor: #26822B;
+    --warningColor: #FEA23C;
+    --darkwarningColor: #C46F00;
+    --dangerColor: #DF0B0B;
+    --darkdangerColor: #FF2600;
 
-  /* Warning color */
-  --warningColor: #fea23c;
-  --darkwarningColor: rgb(196, 111, 0);
-
-  /* Danger color */
-  --dangerColor: #df0b0b;
-  --darkdangerColor: #ff2600;
-
-  /*font*/
-  --DefaultFont: Poppins;
-  --TitleFont: Poppins;
+    /* Fonts */
+    --DefaultFont: 'Poppins', sans-serif;
+    --TitleFont: 'Poppins', sans-serif;
 }
 
 .darktheme {
-  /* principal color */
-  --primaryColor: #9034ff;
-  --secondaryColor: #101621;
-  --thirdColor: #ffffff;
+    /* Primary Colors */
+    --primaryColor: #32A08C;
+    --secondaryColor: #5DC0DC;
+    --thirdColor: #ffffff;
 
-  --disabledColor: #7f7f7f;
-  --whiteColor: #030239;
-  --fillInput: #101621;
-  --greyColor: #1c2638;
-  --hoverColor: rgba(255, 255, 255, 0.1);
+    --disabledColor: #7F8C8D;
+    --whiteColor: #101621;
+    --fillInput: #1B2A34;
+    --greyColor: #2C3E50;
+    --hoverColor: rgba(50, 160, 140, 0.1);
 
-  /* background */
-  --backgroundColor: #090d14;
+    /* Background Colors */
+    --backgroundColor: #0B1A22;
 
-  /* Transparent Color */
-  --whiteColorTransparent: rgba(255, 255, 255, 0.05);
-  --darkColorTransparent: rgba(255, 255, 255, 0.06);
-  --scrollColor: rgba(255, 255, 255, 0.368);
+    /* Transparent Colors */
+    --whiteColorTransparent: rgba(255, 255, 255, 0.05);
+    --darkColorTransparent: rgba(255, 255, 255, 0.06);
+    --scrollColor: rgba(255, 255, 255, 0.368);
 
-  /* Font color */
-  --darkFontColor: #ffffff;
-  --lightFontColor: #393b3d;
-  --darkTitleColor: #ffffff;
+    /* Font Colors */
+    --darkFontColor: #ffffff;
+    --lightFontColor: #A5B9C6;
 
-  /* Success color */
-  --succesColor: #1b9a22;
-  --darksuccesColor: #26822b;
+    /* Status Colors */
+    --succesColor: #1B9A22;
+    --darksuccesColor: #26822B;
+    --warningColor: #FEA23C;
+    --darkwarningColor: #C46F00;
+    --dangerColor: #DF0B0B;
+    --darkdangerColor: #FF2600;
 
-  /* Warning color */
-  --warningColor: #fea23c;
-  --darkwarningColor: rgb(196, 111, 0);
-
-  /* Danger color */
-  --dangerColor: #df0b0b;
-  --darkdangerColor: #ff2600;
-
-  /* font*/
-  --DefaultFont: Poppins;
-  --TitleFont: Poppins;
+    /* Fonts */
+    --DefaultFont: 'Poppins', sans-serif;
+    --TitleFont: 'Poppins', sans-serif;
 }

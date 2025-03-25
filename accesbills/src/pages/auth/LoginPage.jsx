@@ -16,6 +16,8 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    console.log(email, password);
+
     // Simuler une requête d'authentification
     setTimeout(() => {
       setIsLoading(false);
@@ -305,7 +307,7 @@ const Login = () => {
               transition={{ delay: 0.8, duration: 0.6 }}
             >
               <p className="signup-text">
-                Pas encore de compte?{" "}
+                Pas encore de compte?
                 <motion.a
                   href="#"
                   className="signup-link"

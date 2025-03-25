@@ -1,0 +1,64 @@
+@import './variable.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--DefaultFont);
+}
+
+body {
+    background-color: var(--backgroundColor);
+    color: var(--darkFontColor);
+    transition: all 0.3s ease-in-out;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button {
+    background-color: var(--primaryColor);
+    color: var(--whiteColor);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    &:hover {
+        background-color: var(--secondaryColor);
+    }
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--greyColor);
+    border-radius: 5px;
+    background-color: var(--fillInput);
+    &:focus {
+        outline: none;
+        border-color: var(--primaryColor);
+    }
+}
+
+.darktheme {
+    body {
+        background-color: var(--backgroundColor);
+        color: var(--darkFontColor);
+    }
+}
