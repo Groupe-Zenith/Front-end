@@ -5,6 +5,7 @@ import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { Bell, User, LucideLogOut } from "lucide-react";
 import "./adminHeader.scss"
 import { Link } from "react-router-dom";
+import socket, { connectSocket, getAllPurchaseRequest } from "../../../../services/notificationService";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -57,6 +58,19 @@ const Header = () => {
     <Link to="/"/>
     
   };
+
+  //socket
+  useEffect(() => {
+    connectSocket();
+    fetchPurchaseRequest();
+    // return () => {
+    //   socket.disconnect(); // Déconnecte le socket lors du démontage du composant
+    // };
+  });
+
+  const fetchPurchaseRequest = () => {
+    getAllPurchaseRequest();
+  };
   return (
     <div className="Header">
       <div className="search-container">
@@ -105,7 +119,8 @@ const Header = () => {
 
         <div className="user-actions">
             <User className="user-icon" />
-            <Bell className="user-icon"/>
+            <Bell  className="user-icon"/>
+            
           <LucideLogOut
            className="logout-icon" 
            onClick={handleLogoutClick} />
