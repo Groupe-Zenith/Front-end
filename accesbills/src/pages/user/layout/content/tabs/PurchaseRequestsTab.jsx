@@ -1,66 +1,49 @@
 "use client"
 
-import { Search } from 'lucide-react'
-import "./PurchaseRequestsTab.scss"
+import DataTable from '../../../../../components/common/dataTabs/DataTable'
 
-export default function PurchaseRequestsTab() {
+const PurchaseRequestsPage = () => {
   const requests = [
-    { id: "PR-2023-001", date: "2023-05-10", items: "Fournitures de bureau", status: "En attente", statusClass: "status-pending" },
-    { id: "PR-2023-002", date: "2023-04-28", items: "Équipement informatique", status: "Approuvé", statusClass: "status-approved" },
-    { id: "PR-2023-003", date: "2023-04-15", items: "Licences logicielles", status: "Rejeté", statusClass: "status-rejected" }
+    { id: "PR-2023-001", date: "2023-05-10", items: "Fournitures de bureau", status: "En attente" },
+    { id: "PR-2023-002", date: "2023-04-28", items: "Équipement informatique", status: "Approuvé" },
+    { id: "PR-2023-003", date: "2023-04-15", items: "Licences logicielles", status: "Rejeté" }
   ];
 
+  const statusConfig = {
+    "En attente": { className: "status-pending" },
+    "Approuvé": { className: "status-approved" },
+    "Rejeté": { className: "status-rejected" }
+  };
+
+  const columns = [
+    { key: 'id', label: 'ID Demande' },
+    { key: 'date', label: 'Date' },
+    { key: 'items', label: 'Bien' },
+    { key: 'status', label: 'Statut' },
+    { key: 'actions', label: 'Actions' }
+  ];
+
+  const handleNewRequest = () => {
+    console.log('Nouvelle demande créée');
+  };
+
+  const handleRowClick = (item) => {
+    console.log('Détails de la demande:', item);
+  };
+
   return (
-    <div className="purchase-requests-container">
-      <div className="header-section">
-        <h3>Demande d'achat</h3>
-        <p>Demande d'achat recement</p>
-      </div>
-      <div className="content-section">
-        <div className="controls-wrapper">
-          <div className="search-container">
-            <input 
-              placeholder="rechercher demande..." 
-              className="search-input"
-            />
-            <button className="search-button">
-              <Search className="search-icon" />
-            </button>
-          </div>
-          <button className="new-request-button">
-            Nouvelle demande
-          </button>
-        </div>
-        
-        <div className="table-container">
-          <table className="requests-table">
-            <thead>
-              <tr>
-                <th>Request ID</th>
-                <th>Date</th>
-                <th>Bien</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {requests.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.id}</td>
-                  <td>{item.date}</td>
-                  <td>{item.items}</td>
-                  <td>
-                    <span className={`status-badge ${item.statusClass}`}>{item.status}</span>
-                  </td>
-                  <td>
-                    <button className="view-button">View</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  )
-}
+    <DataTable
+      title="Demande d'achat"
+      description="Demande d'achat récentes"
+      searchPlaceholder="Rechercher demande..."
+      actionButtonText="Nouvelle demande"
+      columns={columns}
+      data={requests}
+      onActionClick={handleNewRequest}
+      onRowClick={handleRowClick}
+      statusConfig={statusConfig}
+    />
+  );
+};
+
+export default PurchaseRequestsPage;
