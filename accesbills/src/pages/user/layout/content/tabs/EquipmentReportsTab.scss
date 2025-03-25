@@ -1,0 +1,139 @@
+.equipment-reports {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background-color: white;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  
+    .reports-header {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem;
+  
+      h3 {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+  
+      p {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: #6b7280;
+      }
+    }
+  
+    .reports-content {
+      padding: 1.5rem;
+  
+      .reports-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        gap: 1rem;
+  
+        .search-container {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+  
+          .search-input {
+            max-width: 24rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            width: 100%;
+          }
+  
+          .search-button {
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            
+            &:hover {
+              background-color: #f9fafb;
+            }
+  
+            .search-icon {
+              height: 1rem;
+              width: 1rem;
+            }
+          }
+        }
+  
+        .generate-button {
+          padding: 0.5rem 1rem;
+          background-color: #2563eb;
+          color: white;
+          border-radius: 0.375rem;
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+          
+          &:hover {
+            background-color: #1d4ed8;
+          }
+        }
+      }
+  
+      .reports-grid {
+        display: grid;
+        gap: 1rem;
+  
+        @media (min-width: 768px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+  
+        @media (min-width: 1024px) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+  
+        .report-card {
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          padding: 1rem;
+          transition: box-shadow 0.2s ease;
+  
+          &:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          }
+  
+          .card-header {
+            padding-bottom: 0.5rem;
+  
+            h4 {
+              font-size: 0.875rem;
+              line-height: 1.25rem;
+              font-weight: 500;
+            }
+          }
+  
+          .card-content {
+            .report-value {
+              font-size: 1.5rem;
+              line-height: 2rem;
+              font-weight: 700;
+            }
+  
+            .report-date {
+              font-size: 0.75rem;
+              line-height: 1rem;
+              color: #6b7280;
+            }
+  
+            .view-button {
+              margin-top: 0.5rem;
+              font-size: 0.875rem;
+              line-height: 1.25rem;
+              color: #2563eb;
+              
+              &:hover {
+                color: #1e40af;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
