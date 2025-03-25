@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Bell, Clock, FileText, Menu, Package, Settings, User, X } from "lucide-react";
+import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import "./UserNavbar.scss";
 
 export default function UserNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true); // État pour les notifications non lues
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true);
 
   return (
     <nav className="navbar">
@@ -15,8 +16,10 @@ export default function UserNavbar() {
           <span>AccesBills</span>
         </div>
 
-        {/* User Menu avec notification */}
-        <div className="user-menu-wrapper">
+        <div className="desktop-controls">
+          {/* Ajout du ThemeToggle */}
+          <ThemeToggle />
+
           {/* Icône de notification */}
           <div className="notification-icon">
             <Bell className="icon" />
@@ -52,6 +55,7 @@ export default function UserNavbar() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="mobile-menu">
+            <ThemeToggle className="mobile-theme-toggle" />
             <Link to="/history" className="nav-item" onClick={() => setIsMobileMenuOpen(false)}>
               <Clock className="icon" /> Historique
             </Link>
