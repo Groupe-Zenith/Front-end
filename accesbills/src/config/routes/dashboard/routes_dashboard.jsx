@@ -5,7 +5,7 @@ import AdminPage from "../../../pages/admin/mainAdminPage";
 const RoutesDashboard = () => {
   return (
     <Routes>
-      <Route path="/dashboard" element={<AdminPage />} />
+      <Route path="/dashboard/*" element={<AdminPage />} />
     </Routes>
   );
 };

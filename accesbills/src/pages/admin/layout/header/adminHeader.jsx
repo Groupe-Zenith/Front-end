@@ -4,7 +4,9 @@ import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { IoNotifications } from "react-icons/io5";
+import LogoutModal from "../../../../components/admin/Modal/Modal";
 import "./adminHeader.scss"
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -13,8 +15,8 @@ const Header = () => {
     label: "English",
     flag: engFlag,
   });
+  const [modalVisible, setModalVisible] = useState(false); 
   const languageSelectorRef = useRef(null);
-
   const languages = [
     { code: "en", label: "English", flag: engFlag },
     { code: "mg", label: "Malagasy", flag: mlgFlag },
@@ -42,7 +44,21 @@ const Header = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  const handleLogoutClick = () => {
+    setModalVisible(true);
+  };
 
+
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
+
+
+  const handleConfirmLogout = () => {
+    setModalVisible(false);
+    <Link to="/"/>
+    
+  };
   return (
     <div className="Header">
       <div className="search-container">
@@ -92,9 +108,16 @@ const Header = () => {
         <div className="user-actions">
             <LuUser className="user-icon" />
             <IoNotifications className="user-icon"/>
-          <LuLogOut className="logout-icon" />
+          <LuLogOut
+           className="logout-icon" 
+           onClick={handleLogoutClick} />
         </div>
       </div>
+      <LogoutModal
+        visible={modalVisible}
+        onCancel={handleCancel}
+        onConfirm={handleConfirmLogout}
+      />
     </div>
   );
 };

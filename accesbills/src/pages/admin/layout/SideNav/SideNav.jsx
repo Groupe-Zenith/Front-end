@@ -1,39 +1,15 @@
 import React, { useState } from "react";
 import { LuLayoutDashboard, LuUser, LuUserCheck, LuShoppingCart, LuBox ,LuMenu } from "react-icons/lu"; 
+import logo_app from "/App_logo.png"
 import classnames from "classnames";
 import "./SideNav.scss";
 
 const menus = [
-  {
-    title: "Dashboard",
-    icon: <LuLayoutDashboard className="menu-icon" />,
-    link: "/dashboard",
-    submenu: [],
-  },
-  {
-    title: "Employee Account",
-    icon: <LuUser className="menu-icon" />,
-    link: "/employee-account",
-    submenu: [],
-  },
-  {
-    title: "Manager Account",
-    icon: <LuUserCheck className="menu-icon" />,
-    link: "/manager-account",
-    submenu: [],
-  },
-  {
-    title: "Buying Request",
-    icon: <LuShoppingCart className="menu-icon" />,
-    link: "/buying-request",
-    submenu: [],
-  },
-  {
-    title: "Inventory",
-    icon: <LuBox className="menu-icon" />,
-    link: "/inventory",
-    submenu: [],
-  }
+  { title: "Dashboard", icon: <LuLayoutDashboard />, link: "/dashboard" },
+  { title: "Employee Account", icon: <LuUser />, link: "/dashboard/employee-account" },
+  { title: "Manager Account", icon: <LuUserCheck />, link: "/dashboard/manager-account" },
+  { title: "Buying Request", icon: <LuShoppingCart />, link: "/dashboard/buying-request" },
+  { title: "Inventory", icon: <LuBox />, link: "/dashboard/inventory" }
 ];
 
 const SideNav= () => {
@@ -46,7 +22,7 @@ const SideNav= () => {
   return (
     <div id="sidebar" className={classnames("sidebar", { collapsed })}>
       <div className="sidebar-header">
-        <span className="logo" onClick={handleToggle}>AK-B</span>
+        <img src={logo_app} alt="LOGO"  onClick={handleToggle}/>
         <span className="text-logo">Acces Bill</span>
         <button onClick={handleToggle} className="sidebar-collapser">
           <LuMenu className="io-menu" />

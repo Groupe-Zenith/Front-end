@@ -4,11 +4,10 @@
   position: fixed;
   z-index: 10;
   top: 0;
-  width: 22rem;
+  width: 20rem;
   height: 100vh;
-  box-shadow: 0.05rem 0 1.2rem 0.05rem rgba(0, 0, 0, 0.09);
+  box-shadow: 0.05rem 0 1.2rem 0.05rem rgba(0, 0, 0, 0.05);
   border-radius: 10px;
-
   border-right: 1px solid var(--greyColor);;
   border-radius: 10px; 
   
@@ -59,7 +58,6 @@
     }
     .sidebar-header {
       .logo {
-        // width: 6rem;
         height: 4rem;
         font-size: 20px;
       }
@@ -72,19 +70,12 @@
     padding: 1rem 2.5rem 1rem 2rem;
     gap: 2rem;
 
-    .logo {
+    img {
       display: flex;
-      background-color: var(--primaryColor);
       align-items: center;
       justify-content: center;
-      width: 5rem;
-      height: 5rem;
-      border-radius: 50%;
-      font-size: 24px;
-      font-weight: 900;
+      width: 3rem;
       cursor: pointer;
-      border: none;
-      color: var(--whiteColor);
       transition: all 0.3s ease-in-out;
     }
 

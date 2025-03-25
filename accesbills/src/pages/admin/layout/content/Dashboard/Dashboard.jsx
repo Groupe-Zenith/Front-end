@@ -53,7 +53,7 @@ const lineOptions = {
 const Dashboard = () => {
     return (
         <div className="dashboard">
-            <div className="cards-container">
+            <div className="card-container">
                 {dashboardData.map((item, index) => (
                     <Card key={index} title={item.title} value={item.value} />
                 ))}
