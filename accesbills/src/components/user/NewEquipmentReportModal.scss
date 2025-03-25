@@ -1,0 +1,130 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--darkColorTransparent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background-color: var(--whiteColor);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px var(--darkColorTransparent);
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--greyColor);
+  
+  h3 {
+    font-size: 1.25rem;
+    color: var(--darkFontColor);
+    margin: 0;
+    font-family: var(--TitleFont);
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--lightFontColor);
+    
+    &:hover {
+      color: var(--darkFontColor);
+    }
+  }
+}
+
+.modal-form {
+  padding: 1.5rem;
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--darkFontColor);
+      font-family: var(--DefaultFont);
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--greyColor);
+      border-radius: 0.375rem;
+      font-family: var(--DefaultFont);
+      background-color: var(--fillInput);
+      color: var(--darkFontColor);
+      
+      &:focus {
+        outline: none;
+        border-color: var(--primaryColor);
+        box-shadow: 0 0 0 2px rgba(var(--primaryColor), 0.2);
+      }
+    }
+    
+    .select-input {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 1rem;
+    }
+    
+    textarea {
+      resize: vertical;
+    }
+  }
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--greyColor);
+  
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-family: var(--DefaultFont);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .cancel-button {
+    background-color: transparent;
+    border: 1px solid var(--greyColor);
+    color: var(--lightFontColor);
+    
+    &:hover {
+      background-color: var(--hoverColor);
+    }
+  }
+  
+  .submit-button {
+    background-color: var(--primaryColor);
+    color: var(--whiteColor);
+    border: none;
+    
+    &:hover {
+      background-color: var(--thirdColor);
+    }
+  }
+}
