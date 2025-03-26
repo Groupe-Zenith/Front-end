@@ -11,7 +11,9 @@ export default function UserNavbar() {
   const handleNotificationClick = () => {
     setHasUnreadNotifications(false); 
   };
-
+  const userRole = JSON.parse(localStorage.getItem("user"));
+  ;
+  console.log(userRole);
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -32,8 +34,8 @@ export default function UserNavbar() {
               <User className="icon" />
             </div>
             <div className="dropdown">
-              <p className="user-name">Mumu</p>
-              <p className="user-email">muriella@example.com</p>
+              <p className="user-name">{userRole.first_name}</p>
+              <p className="user-email">{userRole.email}</p>
               <hr />
               <Link to="/profile" className="dropdown-item">
                 <User className="icon" /> Profile

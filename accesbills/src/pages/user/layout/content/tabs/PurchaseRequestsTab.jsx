@@ -2,9 +2,11 @@ import { useState } from 'react';
 import DataTable from '../../../../../components/common/dataTabs/DataTable';
 import NewPurchaseRequestModal from '../../../../../components/user/NewPurchaseRequestModal';
 import './PurchaseRequestsTab.scss';
+import { handlePostPurchase } from '../../../../../services/APIPurchase';
 
 const PurchaseRequestsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const user =JSON.parse(localStorage.getItem("user"));
   const [requests, setRequests] = useState([
     { 
       id: "PR-2023-004", 
@@ -63,23 +65,23 @@ const PurchaseRequestsPage = () => {
     setIsModalOpen(false);
   };
 
-  const handleSubmitRequest = (newRequest) => {
+  const handleSubmitRequest = async (newRequest) => {
     // Simuler la création d'une nouvelle demande
     const newRequestWithId = {
-      id: `PR-${new Date().getFullYear()}-${requests.length + 1}`,
-      date: new Date().toISOString().split('T')[0],
+      user_id: user._id,
       ...newRequest,
       quantity: parseInt(newRequest.quantity),
       estimated_price: parseFloat(newRequest.estimated_price),
-      status: "En attente"
+
     };
-    
-    console.log('Nouvelle demande soumise:', newRequestWithId);
-    
+    await handlePostPurchase(newRequestWithId);
+
     setRequests([newRequestWithId, ...requests]);
     setIsModalOpen(false);
   };
-
+  const fetchPurchaseRequest = () => {
+      getAllPurchaseRequest();
+    };
   const handleRowClick = (item) => {
     console.log('Détails de la demande:', item);
   };

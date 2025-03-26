@@ -3,25 +3,31 @@ import { motion } from "framer-motion";
 import "./Auth.scss";
 import { Lock, Mail, ChevronRight, Shield, Code, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { HandleLogin } from "../../services/ApiUser";
+import { useNavigate } from "react-router-dom";
+import {toast , Toaster} from "sonner"
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [scan, setScan] = useState(false);
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
-    console.log(email, password);
-
-    // Simuler une requête d'authentification
-    setTimeout(() => {
-      setIsLoading(false);
-      // Rediriger ou afficher un message de succès
-    }, 1500);
+    const user = await HandleLogin({ email, password });
+    setIsLoading(false);
+    if (user?.error) {
+      alert(user.error);
+      return;
+    }
+    if (user.role === "admin") {
+      navigate("/dashboard");
+    } else {
+      navigate("/user");
+    }
   };
 
   const containerVariants = {

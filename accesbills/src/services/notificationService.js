@@ -9,11 +9,13 @@ export const connectSocket = () => {
   socket.on("PurchaseRequest", (data) => {
     console.log("📦 Données des biens reçues :", data);
   });
-
+  
 
  
 };
-
+export const createPurchaseRequest = (data) => {
+  socket.emit("createPurchaseRequest", data);
+}
 export const getAllPurchaseRequest = () => {
   socket.emit("getAllPurchaseRequest");
 };

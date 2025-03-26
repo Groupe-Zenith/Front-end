@@ -3,12 +3,10 @@ import mlgFlag from "../../../../assets/images/.jpeg/mlgFlag.jpeg";
 import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { Bell, User, LucideLogOut } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import "./adminHeader.scss";
 import { Link } from "react-router-dom";
-import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
-import { useTranslation } from "react-i18next";
-import { useAudio } from "../../../../assets/sounds/AudioContext";
-import notifSound from "../../../../assets/sounds/notif.mp3";
 import socket, { connectSocket, getAllPurchaseRequest } from "../../../../services/notificationService";
 
 const Header = () => {
@@ -106,9 +104,12 @@ const Header = () => {
         </div>
 
         <div className="user-actions">
-          <User className="user-icon" />
-          <Bell className="user-icon" />
-          <LucideLogOut className="user-icon" onClick={handleLogoutClick} />
+            <User className="user-icon" />
+            <Bell  className="user-icon"/>
+            
+          <LucideLogOut
+           className="logout-icon" 
+           onClick={handleLogoutClick} />
         </div>
       </div>
     </div>
