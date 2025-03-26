@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import mlgFlag from "../../../../assets/images/.jpeg/mlgFlag.jpeg";
 import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
-import { Bell, User, LucideLogOut } from "lucide-react";
+import { Bell, User, LucideLogOut, Search } from "lucide-react";
 import "./adminHeader.scss";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
@@ -86,6 +86,7 @@ const Header = () => {
     <header className="Header">
       <audio ref={audioRef} src={notifSound} preload="auto" />
       <div className="search-container">
+        <Search className="search-icon" size={18} />
         <input type="text" placeholder={t("Search")} className="search-input" />
       </div>
       <ThemeToggle />
@@ -100,7 +101,7 @@ const Header = () => {
               alt={selectedLanguage.label}
               className="flag-icon"
             />
-            ▼
+            <span className="arrow">{showMenu ? "▲" : "▼"}</span>
           </button>
 
           {showMenu && (
@@ -116,9 +117,15 @@ const Header = () => {
         </div>
 
         <div className="user-actions">
-          <User className="user-icon" />
-          <Bell className="user-icon" />
-          <LucideLogOut className="user-icon" onClick={handleLogoutClick} />
+          <button className="user-btn">
+            <User className="user-icon" />
+          </button>
+          <button className="user-btn">
+            <Bell className="user-icon" />
+          </button>
+          <button className="user-btn logout" onClick={handleLogoutClick}>
+            <LucideLogOut className="user-icon" />
+          </button>
         </div>
       </div>
 
