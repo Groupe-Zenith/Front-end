@@ -21,5 +21,5 @@ npm run build
 ## Technologies utilisées
 React
 Vite
-JavaScript
-CSS (ou une autre solution de styling
+SCSS 
+Tailwindcss
