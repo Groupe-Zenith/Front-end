@@ -3,14 +3,11 @@ import mlgFlag from "../../../../assets/images/.jpeg/mlgFlag.jpeg";
 import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { Bell, User, LucideLogOut } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import "./adminHeader.scss";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
-import { useTranslation } from "react-i18next";
-=======
 import socket, { connectSocket, getAllPurchaseRequest } from "../../../../services/notificationService";
->>>>>>> 58f9f3494b866b49ae3daa80a568c88cc5d1845b
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -65,8 +62,6 @@ const Header = () => {
     <Link to="/" />;
   };
 
-<<<<<<< HEAD
-=======
   //socket
   useEffect(() => {
     connectSocket();
@@ -79,7 +74,6 @@ const Header = () => {
   const fetchPurchaseRequest = () => {
     getAllPurchaseRequest();
   };
->>>>>>> 58f9f3494b866b49ae3daa80a568c88cc5d1845b
   return (
     <div className="Header">
       <div className="search-container">
@@ -106,18 +100,12 @@ const Header = () => {
         </div>
 
         <div className="user-actions">
-<<<<<<< HEAD
-          <User className="user-icon" />
-          <Bell className="user-icon" />
-          <LucideLogOut className="user-icon" onClick={handleLogoutClick} />
-=======
             <User className="user-icon" />
             <Bell  className="user-icon"/>
             
           <LucideLogOut
            className="logout-icon" 
            onClick={handleLogoutClick} />
->>>>>>> 58f9f3494b866b49ae3daa80a568c88cc5d1845b
         </div>
       </div>
     </div>
