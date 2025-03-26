@@ -4,16 +4,12 @@ import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { Bell, User, LucideLogOut, Search } from "lucide-react";
 import "./adminHeader.scss";
-import { Link } from "react-router-dom";
-import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
-import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router-dom";
 import { useAudio } from "../../../../assets/sounds/AudioContext";
 import notifSound from "../../../../assets/sounds/notif.mp3";
-import socket, {
-  connectSocket,
-  getAllPurchaseRequest,
-} from "../../../../services/notificationService";
-
+import useSocket from "../../../../services/notificationService";
+import { useTranslation } from "react-i18next";
+import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 const Header = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
@@ -41,9 +37,9 @@ const Header = () => {
     setSelectedLanguage(language);
     setShowMenu(false);
     i18n.changeLanguage(language.code);
-    audioRef.current.play().catch((error) => {
-      console.log("Playback prevented: ", error);
-    });
+    audioRef.current
+      .play()
+      .catch((error) => console.log("Playback prevented: ", error));
   };
 
   useEffect(() => {
@@ -89,16 +85,13 @@ const Header = () => {
       <ThemeToggle />
       <div className="button-header">
         <div className="language-selector" ref={languageSelectorRef}>
-          <button
-            className="lang-button"
-            onClick={() => setShowMenu(!showMenu)}
-          >
+          <button className="lang-button" onClick={() => setShowMenu(!showMenu)}>
             <img
               src={selectedLanguage.flag}
               alt={selectedLanguage.label}
               className="flag-icon"
             />
-            <span className="arrow">{showMenu ? "▲" : "▼"}</span>
+            ▼
           </button>
           {showMenu && (
             <ul className="lang-menu">
@@ -113,15 +106,9 @@ const Header = () => {
         </div>
 
         <div className="user-actions">
-          <button className="user-btn">
-            <User className="user-icon" />
-          </button>
-          <button className="user-btn">
-            <Bell className="user-icon" />
-          </button>
-          <button className="user-btn logout" onClick={handleLogoutClick}>
-            <LucideLogOut className="user-icon" />
-          </button>
+          <User className="user-icon" />
+          <Bell className="user-icon" />
+          <LucideLogOut className="logout-icon" onClick={handleLogoutClick} />
         </div>
       </div>
 
