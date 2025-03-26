@@ -9,7 +9,10 @@ import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import { useTranslation } from "react-i18next";
 import { useAudio } from "../../../../assets/sounds/AudioContext";
 import notifSound from "../../../../assets/sounds/notif.mp3";
-import socket, { connectSocket, getAllPurchaseRequest } from "../../../../services/notificationService";
+import socket, {
+  connectSocket,
+  getAllPurchaseRequest,
+} from "../../../../services/notificationService";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -35,7 +38,7 @@ const Header = () => {
     i18n.changeLanguage(language.code);
     audioRef.current.play().catch((error) => {
       console.log("Playback prevented: ", error);
-  }); 
+    });
   };
 
   useEffect(() => {
@@ -80,7 +83,7 @@ const Header = () => {
     getAllPurchaseRequest();
   };
   return (
-    <div className="Header">
+    <header className="Header">
       <audio ref={audioRef} src={notifSound} preload="auto" />
       <div className="search-container">
         <input type="text" placeholder={t("Search")} className="search-input" />
@@ -88,8 +91,15 @@ const Header = () => {
       <ThemeToggle />
       <div className="button-header">
         <div className="language-selector" ref={languageSelectorRef}>
-          <button className="lang-button" onClick={() => setShowMenu(!showMenu)}>
-            <img src={selectedLanguage.flag} alt={selectedLanguage.label} className="flag-icon" />
+          <button
+            className="lang-button"
+            onClick={() => setShowMenu(!showMenu)}
+          >
+            <img
+              src={selectedLanguage.flag}
+              alt={selectedLanguage.label}
+              className="flag-icon"
+            />
             ▼
           </button>
 
@@ -111,7 +121,27 @@ const Header = () => {
           <LucideLogOut className="user-icon" onClick={handleLogoutClick} />
         </div>
       </div>
-    </div>
+
+      {modalVisible && (
+        <div className="logout-modal">
+          <div className="modal-content">
+            <h2>{t("Confirm Logout")}</h2>
+            <p>{t("Are you sure you want to log out?")}</p>
+            <div className="modal-actions">
+              <button
+                className="btn btn-secondary"
+                onClick={() => setModalVisible(false)}
+              >
+                {t("Cancel")}
+              </button>
+              <button className="btn btn-primary" onClick={handleConfirmLogout}>
+                {t("Logout")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 
