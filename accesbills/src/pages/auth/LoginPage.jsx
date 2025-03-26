@@ -5,7 +5,6 @@ import { Lock, Mail, ChevronRight, Shield, Code, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { HandleLogin } from "../../services/ApiUser";
 import { useNavigate } from "react-router-dom";
-import {toast , Toaster} from "sonner"
 
 const Login = () => {
   const [email, setEmail] = useState("");

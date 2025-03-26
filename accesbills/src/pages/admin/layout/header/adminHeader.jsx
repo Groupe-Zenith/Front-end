@@ -5,9 +5,11 @@ import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { Bell, User, LucideLogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
+import { useAudio } from "../../../../assets/sounds/AudioContext";
+import notifSound from "../../../../assets/sounds/notif.mp3";
 import "./adminHeader.scss";
 import { Link } from "react-router-dom";
-import socket, { connectSocket, getAllPurchaseRequest } from "../../../../services/notificationService";
+import { connectSocket, getAllPurchaseRequest } from "../../../../services/notificationService";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
