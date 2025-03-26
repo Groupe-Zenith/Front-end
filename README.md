@@ -25,3 +25,6 @@ React
 Vite
 SCSS 
 Tailwindcss
+
+## Remarque 
+Lors de la création du compte, vérifier l'OTP dans le spam de votre mail
