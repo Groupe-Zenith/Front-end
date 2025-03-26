@@ -44,7 +44,9 @@ export default function UserNavbar() {
                 <TableOfContents className="icon" />Contenue
               </Link>
               <hr />
+              <Link to="/login">\
               <button className="dropdown-item logout">Deconnexion</button>
+              </Link>
             </div>
           </div>
         </div>
