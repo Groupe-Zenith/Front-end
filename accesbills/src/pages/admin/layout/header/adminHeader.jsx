@@ -4,41 +4,42 @@ import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { Bell, User, LucideLogOut, Search } from "lucide-react";
 import "./adminHeader.scss";
-import { Link } from "react-router-dom";
-import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
-import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router-dom";
 import { useAudio } from "../../../../assets/sounds/AudioContext";
 import notifSound from "../../../../assets/sounds/notif.mp3";
-import socket, {
-  connectSocket,
-  getAllPurchaseRequest,
-} from "../../../../services/notificationService";
-
+import useSocket from "../../../../services/notificationService";
+import { useTranslation } from "react-i18next";
+import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 const Header = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState({
     code: "en",
     label: t("English"),
     flag: engFlag,
   });
-
   const [modalVisible, setModalVisible] = useState(false);
   const languageSelectorRef = useRef(null);
+  const { audioRef } = useAudio();
 
+  // Utilisation du hook pour récupérer les demandes (pour éventuellement afficher des notifications, etc.)
+  const { getAllPurchaseRequest ,purchaseRequests} = useSocket();
+  console.log(purchaseRequests);
+  
   const languages = [
     { code: "en", label: t("English"), flag: engFlag },
     { code: "mg", label: t("Malagasy"), flag: mlgFlag },
     { code: "fr", label: t("French"), flag: frFlag },
   ];
-  const { audioRef } = useAudio();
+
   const handleSelectLanguage = (language) => {
     setSelectedLanguage(language);
     setShowMenu(false);
     i18n.changeLanguage(language.code);
-    audioRef.current.play().catch((error) => {
-      console.log("Playback prevented: ", error);
-    });
+    audioRef.current
+      .play()
+      .catch((error) => console.log("Playback prevented: ", error));
   };
 
   useEffect(() => {
@@ -52,9 +53,8 @@ const Header = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
+    return () =>
       document.removeEventListener("mousedown", handleClickOutside);
-    };
   }, []);
 
   const handleLogoutClick = () => {
@@ -67,21 +67,14 @@ const Header = () => {
 
   const handleConfirmLogout = () => {
     setModalVisible(false);
-    <Link to="/" />;
+    navigate("/"); // Redirection après déconnexion
   };
 
-  //socket
   useEffect(() => {
-    connectSocket();
-    fetchPurchaseRequest();
-    // return () => {
-    //   socket.disconnect(); // Déconnecte le socket lors du démontage du composant
-    // };
-  });
-
-  const fetchPurchaseRequest = () => {
+    // Récupère toutes les demandes au montage du composant
     getAllPurchaseRequest();
-  };
+  }, [getAllPurchaseRequest]);
+
   return (
     <header className="Header">
       <audio ref={audioRef} src={notifSound} preload="auto" />
@@ -92,18 +85,14 @@ const Header = () => {
       <ThemeToggle />
       <div className="button-header">
         <div className="language-selector" ref={languageSelectorRef}>
-          <button
-            className="lang-button"
-            onClick={() => setShowMenu(!showMenu)}
-          >
+          <button className="lang-button" onClick={() => setShowMenu(!showMenu)}>
             <img
               src={selectedLanguage.flag}
               alt={selectedLanguage.label}
               className="flag-icon"
             />
-            <span className="arrow">{showMenu ? "▲" : "▼"}</span>
+            ▼
           </button>
-
           {showMenu && (
             <ul className="lang-menu">
               {languages.map((lang) => (
@@ -117,15 +106,9 @@ const Header = () => {
         </div>
 
         <div className="user-actions">
-          <button className="user-btn">
-            <User className="user-icon" />
-          </button>
-          <button className="user-btn">
-            <Bell className="user-icon" />
-          </button>
-          <button className="user-btn logout" onClick={handleLogoutClick}>
-            <LucideLogOut className="user-icon" />
-          </button>
+          <User className="user-icon" />
+          <Bell className="user-icon" />
+          <LucideLogOut className="logout-icon" onClick={handleLogoutClick} />
         </div>
       </div>
 

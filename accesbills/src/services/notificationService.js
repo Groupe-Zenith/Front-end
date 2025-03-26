@@ -1,23 +1,61 @@
+import { useEffect, useState, useCallback } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000");
+const SOCKET_URL = "http://localhost:5000";
 
-export const connectSocket = () => {
-  socket.on("connect", () => {
-    console.log("🟢 Connecté au serveur Socket.IO !");
-  });
-  socket.on("PurchaseRequest", (data) => {
-    console.log("📦 Données des biens reçues :", data);
-  });
-  
+const useSocket = () => {
+  const [socket, setSocket] = useState(null);
+  const [purchaseRequests, setPurchaseRequests] = useState([]);
+  const [purchaseRequestsByIdUser, setPurchaseRequestsByIdUser] = useState([]);
+  useEffect(() => {
+    const newSocket = io(SOCKET_URL);
+    setSocket(newSocket);
 
- 
+    newSocket.on("connect", () => {
+      console.log("🟢 Connecté au serveur Socket.IO !");
+    });
+
+    newSocket.on("PurchaseRequest", (data) => {
+      // console.log("📦 Données des biens reçues :", data);
+      setPurchaseRequests(data);  
+    });
+    
+    newSocket.on("PurchaseRequestUser", (data) => {
+      // console.log("📦 Données des biens reçues :", data);
+      setPurchaseRequestsByIdUser(data);  
+    });
+    // return () => {
+    //   newSocket.disconnect();
+    // };
+  }, []);
+
+  const createPurchaseRequest = useCallback((data) => {
+    if (socket) {
+      socket.emit("createPurchaseRequest", data);
+    }
+  }, [socket]);
+
+  const getAllPurchaseRequest = useCallback(() => {
+    if (socket) {
+      socket.emit("getAllPurchaseRequest");
+      
+    }
+  }, [socket]);
+
+  const getPurchaseRequestByIdUser = useCallback((user_id) => {
+    if (socket) {
+      socket.emit("getPurchaseRequestByIdUser", user_id);
+      
+    }
+  }, [socket]);
+
+  return {
+    createPurchaseRequest,
+    getAllPurchaseRequest,
+    getPurchaseRequestByIdUser,
+    purchaseRequests,
+    purchaseRequestsByIdUser
+  };
 };
-export const createPurchaseRequest = (data) => {
-  socket.emit("createPurchaseRequest", data);
-}
-export const getAllPurchaseRequest = () => {
-  socket.emit("getAllPurchaseRequest");
-};
 
-export default socket;
+export default useSocket;
