@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import "./adminHeader.scss";
 import { Link } from "react-router-dom";
+import {useAudio} from "../../../../assets/sounds/AudioContext";
+import notifSound from "../../../../assets/sounds/notif.mp3";
 import socket, { connectSocket, getAllPurchaseRequest } from "../../../../services/notificationService";
 
 const Header = () => {

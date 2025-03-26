@@ -2,22 +2,51 @@ import { io } from "socket.io-client";
 
 const socket = io("http://localhost:5000");
 
+// Connexion au socket
 export const connectSocket = () => {
-  socket.on("connect", () => {
-    console.log("🟢 Connecté au serveur Socket.IO !");
-  });
-  socket.on("PurchaseRequest", (data) => {
-    console.log("📦 Données des biens reçues :", data);
-  });
-  
+  return new Promise((resolve, reject) => {
+    socket.on("connect", () => {
+      console.log("🟢 Connecté au serveur Socket.IO !");
+      resolve(true);
+    });
 
- 
+    socket.on("connect_error", (error) => {
+      console.error("❌ Erreur de connexion :", error);
+      reject(error);
+    });
+  });
 };
-export const createPurchaseRequest = (data) => {
-  socket.emit("createPurchaseRequest", data);
-}
+
+// // Créer une demande d'achat
+// export const createPurchaseRequest = (data) => {
+//   return new Promise((resolve, reject) => {
+//     socket.emit("createPurchaseRequest", data);
+
+//     socket.on("PurchaseRequest", (response) => {
+//       console.log("📦 Données des biens reçues :", response);
+//       resolve(response);
+//     });
+
+//     socket.on("error", (error) => {
+//       console.error("❌ Erreur lors de la création :", error);
+//       reject(error);
+//     });
+//   });
+// };
+
+// Récupérer toutes les demandes d'achat
 export const getAllPurchaseRequest = () => {
-  socket.emit("getAllPurchaseRequest");
-};
+  return new Promise((resolve, reject) => {
+    socket.emit("getAllPurchaseRequest");
 
-export default socket;
+    socket.on("PurchaseRequest", (response) => {
+      console.log("📦 Toutes les demandes reçues :", response);
+      resolve(response);
+    });
+
+    socket.on("error", (error) => {
+      console.error("❌ Erreur lors de la récupération :", error);
+      reject(error);
+    });
+  });
+};
