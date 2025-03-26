@@ -1,6 +1,7 @@
 import React from "react";
 import DataTable from "../../../../../components/common/dataTabs/DataTable";
 
+
 const columns = [
   { key: "badgeNumber", label: "Nom d'utilisateur" },
   { key: "firstName", label: "Article demande" },
