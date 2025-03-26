@@ -1,6 +1,8 @@
-import { Search } from 'lucide-react'
-import PropTypes from 'prop-types'
-import './DataTable.scss'
+import {   CheckCircle, XCircle } from 'lucide-react';
+import { MdOutlineDownloading } from "react-icons/md";
+
+import PropTypes from 'prop-types';
+import './DataTable.scss';
 
 const DataTable = ({
   title,
@@ -10,8 +12,9 @@ const DataTable = ({
   columns,
   data,
   onActionClick,
-  onRowClick,
-  statusConfig
+  onView,
+  onApprove,
+  onReject
 }) => {
   return (
     <div className="data-table-container">
@@ -26,9 +29,6 @@ const DataTable = ({
               placeholder={searchPlaceholder}
               className="search-input"
             />
-            <button className="search-button">
-              <Search className="search-icon" />
-            </button>
           </div>
           {actionButtonText && (
             <button className="action-button" onClick={onActionClick}>
@@ -44,25 +44,26 @@ const DataTable = ({
                 {columns.map((column, index) => (
                   <th key={index}>{column.label}</th>
                 ))}
+                <th>Actions</th> {/* Colonne pour les boutons */}
               </tr>
             </thead>
             <tbody>
               {data.map((item, rowIndex) => (
-                <tr key={rowIndex} onClick={() => onRowClick && onRowClick(item)}>
+                <tr key={rowIndex}>
                   {columns.map((column, colIndex) => (
-                    <td key={colIndex}>
-                      {column.key === 'status' && statusConfig ? (
-                        <span 
-                          className={`status-badge ${statusConfig[item[column.key]]?.className || ''}`}
-                          style={statusConfig[item[column.key]]?.style}
-                        >
-                          {item[column.key]}
-                        </span>
-                      ) : (
-                        item[column.key]
-                      )}
-                    </td>
+                    <td key={colIndex}>{item[column.key]}</td>
                   ))}
+                  <td>
+                    <button className="view-btn" onClick={() => onView(item)}>
+                      <MdOutlineDownloading />
+                    </button>
+                    <button className="approve-btn" onClick={() => onApprove(item)}>
+                      <CheckCircle />
+                    </button>
+                    <button className="reject-btn" onClick={() => onReject(item)}>
+                      <XCircle />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -70,8 +71,8 @@ const DataTable = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 DataTable.propTypes = {
   title: PropTypes.string.isRequired,
@@ -86,17 +87,19 @@ DataTable.propTypes = {
   ).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   onActionClick: PropTypes.func,
-  onRowClick: PropTypes.func,
-  statusConfig: PropTypes.object
-}
+  onView: PropTypes.func,
+  onApprove: PropTypes.func,
+  onReject: PropTypes.func
+};
 
 DataTable.defaultProps = {
   description: '',
   searchPlaceholder: 'Rechercher...',
   actionButtonText: null,
   onActionClick: () => {},
-  onRowClick: null,
-  statusConfig: null
-}
+  onView: () => {},
+  onApprove: () => {},
+  onReject: () => {}
+};
 
-export default DataTable
+export default DataTable;

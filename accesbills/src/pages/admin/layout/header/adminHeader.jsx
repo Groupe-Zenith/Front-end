@@ -5,12 +5,11 @@ import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { Bell, User, LucideLogOut } from "lucide-react";
 import "./adminHeader.scss";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
 import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import { useTranslation } from "react-i18next";
-=======
+import { useAudio } from "../../../../assets/sounds/AudioContext";
+import notifSound from "../../../../assets/sounds/notif.mp3";
 import socket, { connectSocket, getAllPurchaseRequest } from "../../../../services/notificationService";
->>>>>>> 58f9f3494b866b49ae3daa80a568c88cc5d1845b
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -29,11 +28,14 @@ const Header = () => {
     { code: "mg", label: t("Malagasy"), flag: mlgFlag },
     { code: "fr", label: t("French"), flag: frFlag },
   ];
-
+  const { audioRef } = useAudio();
   const handleSelectLanguage = (language) => {
     setSelectedLanguage(language);
     setShowMenu(false);
-    i18n.changeLanguage(language.code); // Changement de langue
+    i18n.changeLanguage(language.code);
+    audioRef.current.play().catch((error) => {
+      console.log("Playback prevented: ", error);
+  }); 
   };
 
   useEffect(() => {
@@ -65,8 +67,6 @@ const Header = () => {
     <Link to="/" />;
   };
 
-<<<<<<< HEAD
-=======
   //socket
   useEffect(() => {
     connectSocket();
@@ -79,9 +79,9 @@ const Header = () => {
   const fetchPurchaseRequest = () => {
     getAllPurchaseRequest();
   };
->>>>>>> 58f9f3494b866b49ae3daa80a568c88cc5d1845b
   return (
     <div className="Header">
+      <audio ref={audioRef} src={notifSound} preload="auto" />
       <div className="search-container">
         <input type="text" placeholder={t("Search")} className="search-input" />
       </div>
@@ -106,18 +106,9 @@ const Header = () => {
         </div>
 
         <div className="user-actions">
-<<<<<<< HEAD
           <User className="user-icon" />
           <Bell className="user-icon" />
           <LucideLogOut className="user-icon" onClick={handleLogoutClick} />
-=======
-            <User className="user-icon" />
-            <Bell  className="user-icon"/>
-            
-          <LucideLogOut
-           className="logout-icon" 
-           onClick={handleLogoutClick} />
->>>>>>> 58f9f3494b866b49ae3daa80a568c88cc5d1845b
         </div>
       </div>
     </div>

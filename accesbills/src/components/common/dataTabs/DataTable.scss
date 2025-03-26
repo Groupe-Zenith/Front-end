@@ -127,7 +127,9 @@
                   line-height: 1rem;
                 }
               }
-  
+              .view-button {
+                color: var(--primaryColor);
+              }
               &:first-child td {
                 border-top: none;
               }

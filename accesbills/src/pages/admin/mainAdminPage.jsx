@@ -6,6 +6,7 @@ import Header from "./layout/header/adminHeader";
 import Dashboard from "./layout/content/Dashboard/Dashboard";
 import EmployeeList from "./layout/content/Employee/Employee";
 import ManagerList from "./layout/content/Manager/Manager";
+import RequestList from "./layout/content/Resquest/Request";
 import "./mainAdmin.scss";
 
 const AdminPage = () => {
@@ -21,6 +22,7 @@ const AdminPage = () => {
                         <Route index element={<Dashboard />} />
                         <Route path="employee-account" element={<EmployeeList />} />
                         <Route path="manager-account" element={<ManagerList />} />
+                        <Route path="request-list" element={<RequestList />} />
                     </Routes>
                 </DashboardContent>
             </div>

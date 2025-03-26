@@ -1,13 +1,18 @@
-import React, { useState } from "react";
-import { LuLayoutDashboard, LuUser, LuUserCheck, LuShoppingCart, LuBox ,LuMenu } from "react-icons/lu"; 
+import React, { useState, useEffect } from "react";
+import { LuLayoutDashboard, LuUser, LuUserCheck, LuBox, LuMenu , LuShoppingBag } from "react-icons/lu"; 
 import logo_app from "/App_logo.png";
 import classnames from "classnames";
 import { useTranslation } from 'react-i18next';
+import { startDriverIntro } from "../../../../utils/Driver/IntroGuide";
 import "./SideNav.scss";
 
 const SideNav = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    startDriverIntro();  // Appel de la fonction pour démarrer l'intro
+  }, []);
 
   const handleToggle = () => {
     setCollapsed(!collapsed);
@@ -17,6 +22,7 @@ const SideNav = () => {
     { title: t("Dashboard"), icon: <LuLayoutDashboard />, link: "/dashboard" },
     { title: t("Employees"), icon: <LuUser />, link: "/dashboard/employee-account" },
     { title: t("Manager"), icon: <LuUserCheck />, link: "/dashboard/manager-account" },
+    {title: t("Request"), icon: <LuShoppingBag />, link: "/dashboard/request-list" },
     { title: t("Invotory"), icon: <LuBox />, link: "/dashboard/inventory" }
   ];
 
