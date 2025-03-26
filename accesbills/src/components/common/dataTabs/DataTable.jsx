@@ -16,6 +16,8 @@ const DataTable = ({
   onApprove,
   onReject
 }) => {
+  console.log(data);
+  
   return (
     <div className="data-table-container">
       <div className="header-section">
@@ -49,10 +51,13 @@ const DataTable = ({
             </thead>
             <tbody>
               {data.map((item, rowIndex) => (
-                <tr key={rowIndex}>
-                  {columns.map((column, colIndex) => (
-                    <td key={colIndex}>{item[column.key]}</td>
-                  ))}
+                <tr key={rowIndex}
+                >
+                  {columns.map((column, colIndex) => {
+                      const value = column.key.split('.').reduce((acc, key) => acc?.[key], item);
+  
+                      return <td key={colIndex}>{value}</td>;
+    })}
                   <td>
                     <button className="view-btn" onClick={() => onView(item)}>
                       <MdOutlineDownloading />

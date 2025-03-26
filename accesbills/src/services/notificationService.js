@@ -1,52 +1,61 @@
+import { useEffect, useState, useCallback } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000");
+const SOCKET_URL = "http://localhost:5000";
 
-// Connexion au socket
-export const connectSocket = () => {
-  return new Promise((resolve, reject) => {
-    socket.on("connect", () => {
+const useSocket = () => {
+  const [socket, setSocket] = useState(null);
+  const [purchaseRequests, setPurchaseRequests] = useState([]);
+  const [purchaseRequestsByIdUser, setPurchaseRequestsByIdUser] = useState([]);
+  useEffect(() => {
+    const newSocket = io(SOCKET_URL);
+    setSocket(newSocket);
+
+    newSocket.on("connect", () => {
       console.log("🟢 Connecté au serveur Socket.IO !");
-      resolve(true);
     });
 
-    socket.on("connect_error", (error) => {
-      console.error("❌ Erreur de connexion :", error);
-      reject(error);
+    newSocket.on("PurchaseRequest", (data) => {
+      // console.log("📦 Données des biens reçues :", data);
+      setPurchaseRequests(data);  
     });
-  });
+    
+    newSocket.on("PurchaseRequestUser", (data) => {
+      // console.log("📦 Données des biens reçues :", data);
+      setPurchaseRequestsByIdUser(data);  
+    });
+    // return () => {
+    //   newSocket.disconnect();
+    // };
+  }, []);
+
+  const createPurchaseRequest = useCallback((data) => {
+    if (socket) {
+      socket.emit("createPurchaseRequest", data);
+    }
+  }, [socket]);
+
+  const getAllPurchaseRequest = useCallback(() => {
+    if (socket) {
+      socket.emit("getAllPurchaseRequest");
+      
+    }
+  }, [socket]);
+
+  const getPurchaseRequestByIdUser = useCallback((user_id) => {
+    if (socket) {
+      socket.emit("getPurchaseRequestByIdUser", user_id);
+      
+    }
+  }, [socket]);
+
+  return {
+    createPurchaseRequest,
+    getAllPurchaseRequest,
+    getPurchaseRequestByIdUser,
+    purchaseRequests,
+    purchaseRequestsByIdUser
+  };
 };
 
-// // Créer une demande d'achat
-// export const createPurchaseRequest = (data) => {
-//   return new Promise((resolve, reject) => {
-//     socket.emit("createPurchaseRequest", data);
-
-//     socket.on("PurchaseRequest", (response) => {
-//       console.log("📦 Données des biens reçues :", response);
-//       resolve(response);
-//     });
-
-//     socket.on("error", (error) => {
-//       console.error("❌ Erreur lors de la création :", error);
-//       reject(error);
-//     });
-//   });
-// };
-
-// Récupérer toutes les demandes d'achat
-export const getAllPurchaseRequest = () => {
-  return new Promise((resolve, reject) => {
-    socket.emit("getAllPurchaseRequest");
-
-    socket.on("PurchaseRequest", (response) => {
-      console.log("📦 Toutes les demandes reçues :", response);
-      resolve(response);
-    });
-
-    socket.on("error", (error) => {
-      console.error("❌ Erreur lors de la récupération :", error);
-      reject(error);
-    });
-  });
-};
+export default useSocket;

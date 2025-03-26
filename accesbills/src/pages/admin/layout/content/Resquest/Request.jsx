@@ -1,14 +1,15 @@
-import React , {useEffect}from "react";
+
+import React, { useState, useEffect } from "react";
 import DataTable from "../../../../../components/common/dataTabs/DataTable";
-import socket, { connectSocket, getAllPurchaseRequest } from "../../../../../services/notificationService";
+import useSocket from "../../../../../services/notificationService";
 
 const columns = [
-  { key: "badgeNumber", label: "Nom d'utilisateur" },
-  { key: "firstName", label: "Article demande" },
-  { key: "lastName", label: "Nombre" },
-  { key: "mobile", label: "Prix estimé" },
-  { key: "email", label: "Description" },
-  { key: "role", label: "Date du demande" }
+  { key: "user_id.first_name", label: "Nom d'utilisateur" },
+  { key: "item_name", label: "Article demande" },
+  { key: "quantity", label: "Nombre" },
+  { key: "prix", label: "Prix estimé" },
+  { key: "reason", label: "Description" },
+  { key: "createdAt", label: "Date du demande" }
 ];
 
 const handleRowClick = (rowData) => {
@@ -20,57 +21,12 @@ const handleActionClick = () => {
 };
 
 const RequestList = () => {
-  const [purchaseRequests, setPurchaseRequests] = useState([]);
+  const { getAllPurchaseRequest ,purchaseRequests} = useSocket();
 
   useEffect(() => {
-    const initSocket = async () => {
-      try {
-        await connectSocket();
-        console.log("Socket connecté !");
-        await fetchPurchaseRequest();
-      } catch (error) {
-        console.error("Erreur lors de l'initialisation :", error);
-      }
-    };
+    getAllPurchaseRequest();
+  }, [getAllPurchaseRequest]);
 
-    initSocket();
-
-    return () => {
-      socket.disconnect(); // Déconnecter lors du démontage
-    };
-  }, []);
-
-  const fetchPurchaseRequest = async () => {
-    try {
-      const data = await getAllPurchaseRequest();
-      console.log("Données des demandes d'achat :", data);
-      setPurchaseRequests(data);
-    } catch (error) {
-      console.error("Erreur lors de la récupération :", error);
-    }
-  };
-
- 
-    
-    
-    const data = [
-      {
-        badgeNumber: "54321",
-        firstName: "Alice",
-        lastName: "Johnson",
-        mobile: "+1122334455",
-        email: "alice.johnson@example.com",
-        role: "Manager"
-      },
-      {
-        badgeNumber: "98765",
-        firstName: "Bob",
-        lastName: "Williams",
-        mobile: "+5566778899",
-        email: "bob.williams@example.com",
-        role: "Manager"
-      }
-    ];
   return (
     <div className="Request">
       <DataTable
@@ -78,7 +34,7 @@ const RequestList = () => {
         description="Liste des demandes avec leurs détails"
         searchPlaceholder="Recherche une demande..."
         columns={columns}
-        data={data}
+        data={purchaseRequests}
         onRowClick={handleRowClick}
         onActionClick={handleActionClick}
       />

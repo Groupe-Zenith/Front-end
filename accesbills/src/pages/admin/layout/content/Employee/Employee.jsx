@@ -1,32 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "../../../../../components/common/dataTabs/DataTable"; 
 import "./Employee.scss";
-const columns = [
-  { key: "badgeNumber", label: "Badge Number" },
-  { key: "firstName", label: "Name" },
-  { key: "lastName", label: "Last Name" },
-  { key: "mobile", label: "Mobile" },
-  { key: "email", label: "Email" },
-  { key: "role", label: "Role" }
-];
 
-const data = [
-  {
-    badgeNumber: "12345",
-    firstName: "John",
-    lastName: "Doe",
-    mobile: "+1234567890",
-    email: "john.doe@example.com",
-    role: "Admin"
-  },
-  {
-    badgeNumber: "67890",
-    firstName: "Jane",
-    lastName: "Smith",
-    mobile: "+0987654321",
-    email: "jane.smith@example.com",
-    role: "User"
-  }
+import { handleGetUsers } from "../../../../../services/ApiUser";
+
+// Colonnes adaptées au schéma User
+const columns = [
+  { key: "first_name", label: "First Name" },
+  { key: "last_name", label: "Last Name" },
+  { key: "email", label: "Email" },
+  { key: "role", label: "Role" },
+  { key: "is_active", label: "Active" },
+  { key: "created_at", label: "Created At" }
 ];
 
 const handleRowClick = (rowData) => {
@@ -38,6 +23,18 @@ const handleActionClick = () => {
 };
 
 const EmployeeList = () => {
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const datas = await handleGetUsers("user")
+      
+      setData(datas);
+    };
+    fetchData()
+      
+  }, []);
+
   return (
     <div className="Employee">
       <DataTable
@@ -46,7 +43,7 @@ const EmployeeList = () => {
         searchPlaceholder="Search users..."
         actionButtonText="Add User"
         columns={columns}
-        data={data}
+        data={data || []}  // Assure que data est toujours un tableau
         onRowClick={handleRowClick}
         onActionClick={handleActionClick}
       />
