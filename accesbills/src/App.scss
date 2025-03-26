@@ -1,0 +1,18 @@
+@use "tailwindcss";
+@import url(./styles/font.scss);
+@import url(./styles/variable.scss);
+
+/* Styles globaux */
+#root {
+  margin: 0 auto;
+  font-family: "Poppins";
+  background-color: var(--backgroundColor);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color:var(--backgroundColor);
+}

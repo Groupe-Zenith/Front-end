@@ -1,0 +1,64 @@
+.equipment-reports {
+  background-color: var(--whiteColor);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px var(--darkColorTransparent);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.search-header {
+  padding: 1rem 1.5rem;
+  background-color: var(--fillInput);
+  border-bottom: 1px solid var(--greyColor);
+}
+
+.search-container {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+
+  .search-input {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid var(--greyColor);
+    border-radius: 0.375rem;
+    font-family: var(--DefaultFont);
+    background-color: var(--whiteColor);
+    color: var(--darkFontColor);
+    font-size: 0.875rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primaryColor);
+      box-shadow: 0 0 0 2px rgba(var(--primaryColor), 0.1);
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--lightFontColor);
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.inventory-section {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .search-header {
+    padding: 0.75rem;
+  }
+
+  .inventory-section {
+    padding: 1rem;
+  }
+}

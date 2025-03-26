@@ -1,0 +1,73 @@
+:root {
+    /* Primary Colors */
+    --primaryColor: #34a6c5;
+    --secondaryColor: #32A08C;
+    --thirdColor: #1F4E5F;
+
+    --disabledColor: #A0A0A0;
+    --whiteColor: #ffffff;
+    --fillInput: #F0F7F9;
+    --greyColor: #E3E8EB;
+    --hoverColor: rgba(93, 192, 220, 0.1);
+
+    /* Background Colors */
+    --backgroundColor: #F8FCFD;
+
+    /* Transparent Colors */
+    --whiteColorTransparent: rgba(255, 255, 255, 0.7);
+    --darkColorTransparent: rgba(0, 0, 0, 0.08);
+    --scrollColor: rgba(0, 0, 0, 0.3);
+
+    /* Font Colors */
+    --darkFontColor: #1F2D36;
+    --lightFontColor: #334E57;
+
+    /* Status Colors */
+    --succesColor: #1B9A22;
+    --darksuccesColor: #26822B;
+    --warningColor: #FEA23C;
+    --darkwarningColor: #C46F00;
+    --dangerColor: #DF0B0B;
+    --darkdangerColor: #FF2600;
+
+    /* Fonts */
+    --DefaultFont: 'Poppins', sans-serif;
+    --TitleFont: 'Poppins', sans-serif;
+}
+
+.darktheme {
+    /* Primary Colors */
+    --primaryColor: #32A08C;
+    --secondaryColor: #5DC0DC;
+    --thirdColor: #ffffff;
+
+    --disabledColor: #7F8C8D;
+    --whiteColor: #101621;
+    --fillInput: #1B2A34;
+    --greyColor: #2C3E50;
+    --hoverColor: rgba(50, 160, 140, 0.1);
+
+    /* Background Colors */
+    --backgroundColor: #0B1A22;
+
+    /* Transparent Colors */
+    --whiteColorTransparent: rgba(255, 255, 255, 0.05);
+    --darkColorTransparent: rgba(255, 255, 255, 0.06);
+    --scrollColor: rgba(255, 255, 255, 0.368);
+
+    /* Font Colors */
+    --darkFontColor: #ffffff;
+    --lightFontColor: #A5B9C6;
+
+    /* Status Colors */
+    --succesColor: #1B9A22;
+    --darksuccesColor: #26822B;
+    --warningColor: #FEA23C;
+    --darkwarningColor: #C46F00;
+    --dangerColor: #DF0B0B;
+    --darkdangerColor: #FF2600;
+
+    /* Fonts */
+    --DefaultFont: 'Poppins', sans-serif;
+    --TitleFont: 'Poppins', sans-serif;
+}
