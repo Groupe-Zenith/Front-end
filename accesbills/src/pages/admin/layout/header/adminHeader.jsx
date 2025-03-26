@@ -10,6 +10,7 @@ import notifSound from "../../../../assets/sounds/notif.mp3";
 import useSocket from "../../../../services/notificationService";
 import { useTranslation } from "react-i18next";
 import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
+
 const Header = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
@@ -23,10 +24,9 @@ const Header = () => {
   const languageSelectorRef = useRef(null);
   const { audioRef } = useAudio();
 
-  // Utilisation du hook pour récupérer les demandes (pour éventuellement afficher des notifications, etc.)
-  const { getAllPurchaseRequest ,purchaseRequests} = useSocket();
+  const { getAllPurchaseRequest, purchaseRequests } = useSocket();
   console.log(purchaseRequests);
-  
+
   const languages = [
     { code: "en", label: t("English"), flag: engFlag },
     { code: "mg", label: t("Malagasy"), flag: mlgFlag },
@@ -61,17 +61,12 @@ const Header = () => {
     setModalVisible(true);
   };
 
-  const handleCancel = () => {
-    setModalVisible(false);
-  };
-
   const handleConfirmLogout = () => {
     setModalVisible(false);
-    navigate("/"); // Redirection après déconnexion
+    navigate("/");
   };
 
   useEffect(() => {
-    // Récupère toutes les demandes au montage du composant
     getAllPurchaseRequest();
   }, [getAllPurchaseRequest]);
 
@@ -107,7 +102,12 @@ const Header = () => {
 
         <div className="user-actions">
           <User className="user-icon" />
-          <Bell className="user-icon" />
+          <div className="notification-container">
+            <Bell className="user-icon" />
+            {purchaseRequests.length > 0 && (
+              <span className="notification-badge">{purchaseRequests.length}</span>
+            )}
+          </div>
           <LucideLogOut className="logout-icon" onClick={handleLogoutClick} />
         </div>
       </div>
@@ -118,10 +118,7 @@ const Header = () => {
             <h2>{t("Confirm Logout")}</h2>
             <p>{t("Are you sure you want to log out?")}</p>
             <div className="modal-actions">
-              <button
-                className="btn btn-secondary"
-                onClick={() => setModalVisible(false)}
-              >
+              <button className="btn btn-secondary" onClick={() => setModalVisible(false)}>
                 {t("Cancel")}
               </button>
               <button className="btn btn-primary" onClick={handleConfirmLogout}>
