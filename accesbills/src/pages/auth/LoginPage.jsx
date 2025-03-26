@@ -120,8 +120,8 @@ const Login = () => {
               animate="visible"
               transition={{ delay: 0.2 }}
             >
-              Portail exclusif de gestion au sein des entreprises pour
-              des achats des biens communs 
+              Portail exclusif de gestion au sein des entreprises pour des
+              achats des biens communs
             </motion.p>
           </motion.div>
 
@@ -296,9 +296,7 @@ const Login = () => {
               transition={{ delay: 0.8, duration: 0.6 }}
             >
               <Link to="/signup">
-              <p className="signup-text">
-                Pas encore de compte?
-              </p>
+                <p className="signup-text">Pas encore de compte?</p>
               </Link>
             </motion.div>
           </div>

@@ -1,33 +1,16 @@
-import React from "react";
+import React  , {useState ,useEffect }from "react";
 import DataTable from "../../../../../components/common/dataTabs/DataTable";
+import { handleGetUsers } from "../../../../../services/ApiUser";
 
 const columns = [
-  { key: "badgeNumber", label: "Badge Number" },
-  { key: "firstName", label: "First Name" },
-  { key: "lastName", label: "Last Name" },
-  { key: "mobile", label: "Mobile" },
+  { key: "first_name", label: "First Name" },
+  { key: "last_name", label: "Last Name" },
   { key: "email", label: "Email" },
-  { key: "role", label: "Role" }
+  { key: "role", label: "Role" },
+  { key: "is_active", label: "Active" },
+  { key: "created_at", label: "Created At" }
 ];
 
-const data = [
-  {
-    badgeNumber: "54321",
-    firstName: "Alice",
-    lastName: "Johnson",
-    mobile: "+1122334455",
-    email: "alice.johnson@example.com",
-    role: "Manager"
-  },
-  {
-    badgeNumber: "98765",
-    firstName: "Bob",
-    lastName: "Williams",
-    mobile: "+5566778899",
-    email: "bob.williams@example.com",
-    role: "Manager"
-  }
-];
 
 const handleRowClick = (rowData) => {
   console.log("Row clicked:", rowData);
@@ -38,6 +21,17 @@ const handleActionClick = () => {
 };
 
 const ManagerList = () => {
+  const [data, setData] = useState([]);
+    
+    useEffect(() => {
+      const fetchData = async () => {
+        const datas = await handleGetUsers("manager")
+        
+        setData(datas);
+      };
+      fetchData()
+        
+    }, []);
   return (
     <div className="Manager">
       <DataTable

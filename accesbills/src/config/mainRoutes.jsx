@@ -15,8 +15,7 @@ function RoutesApplication() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/otp-verification" element={<OTPVerification />} />
-      <Route path="/dashboard/*" element={<AdminPage />} />
-      
+      <Route path="/dashboard/*" element={<AdminPage />} />     
       <Route path="/user" element={<MainUserPage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/notifications" element={<NotificationsPage />} />
