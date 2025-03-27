@@ -21,7 +21,7 @@ const Login = () => {
     const user = await HandleLogin({ email, password });
     setIsLoading(false);
     if (user?.error) {
-      alert(user.error);
+      toast.error(user.error);
       return;
     }
     if (user.role === "admin") {
@@ -75,6 +75,7 @@ const Login = () => {
   return (
     <div className="page-container">
       {/* Container principal */}
+      <Toaster/>
       <motion.div
         className="main-card"
         initial={{ opacity: 0, y: 20 }}
