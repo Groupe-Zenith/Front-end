@@ -3,12 +3,11 @@ import DataTable from "../../../../../components/common/dataTabs/DataTable";
 import { handleGetUsers } from "../../../../../services/ApiUser";
 
 const columns = [
-  { key: "first_name", label: "First Name" },
-  { key: "last_name", label: "Last Name" },
+  { key: "first_name", label: "Nom" },
+  { key: "last_name", label: "prénom" },
   { key: "email", label: "Email" },
   { key: "role", label: "Role" },
-  { key: "is_active", label: "Active" },
-  { key: "created_at", label: "Created At" }
+  { key: "created_at", label: "Demande de création"}
 ];
 
 
@@ -35,10 +34,9 @@ const ManagerList = () => {
   return (
     <div className="Manager">
       <DataTable
-        title="Manager List"
-        description="List of managers with their details"
-        searchPlaceholder="Search managers..."
-        actionButtonText="Add Manager"
+        title="Liste des gestionnaires"
+        description="Listes des gestionnaires avec leurs détails"
+        searchPlaceholder="Rechercher..."
         columns={columns}
         data={data}
         onRowClick={handleRowClick}

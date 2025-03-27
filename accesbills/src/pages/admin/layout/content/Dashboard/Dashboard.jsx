@@ -2,12 +2,7 @@ import React from "react";
 import Card from "../../../../../components/admin/Card/Card";
 import Chart from "../../../../../components/admin/Chart/Chart";
 import "./Dashboard.scss";
-
-const dashboardData = [
-    { title: "Nombre d'utilisateur", value: 200 },
-    { title: "Nombre d'achat", value: 150 },
-    { title: "Nombre de demande", value: 80 }
-];
+import { useTranslation } from "react-i18next";
 
 const lineData = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun" ,"Jul" , "Aout" , "Sept" , "Oct" , "Nov" , "Dec"],
@@ -51,6 +46,12 @@ const lineOptions = {
 };
 
 const Dashboard = () => {
+  const {t} = useTranslation()
+  const dashboardData = [
+    { title: t("Card.Card1"), value: 200 },
+    { title:  t("Card.Card2"), value: 150 },
+    { title:  t("Card.Card3"), value: 80 }
+];
     return (
         <div className="dashboard">
             <div className="card-container">

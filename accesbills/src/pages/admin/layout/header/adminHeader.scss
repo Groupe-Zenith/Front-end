@@ -161,7 +161,7 @@
   .notification-container {
     position: relative;
     display: inline-block;
-  
+    cursor: pointer;
     .notification-badge {
       position: absolute;
       top: -5px;
@@ -245,5 +245,168 @@
         }
       }
     }
+  }
+}
+
+/* Modal Container */
+.notification-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  overflow: hidden; /* Prevent scrolling on the background */
+}
+
+.modal-container {
+  background-color: var(--whiteColor);
+  border-radius: 8px;
+  width: 90%; /* Reduced from 100vw to prevent full-width */
+  max-width: 600px; /* Added max-width for larger screens */
+  max-height: 80vh; /* Limit height to viewport */
+  padding: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Contain internal content */
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--primaryColor);
+  flex-shrink: 0; /* Prevent title from shrinking */
+}
+
+.notification-list {
+  list-style: none;
+   padding: 0;
+   margin: 0;
+   overflow-y: auto; /* Allow scrolling if list is long */
+   flex-grow: 1; /* Take available space */
+   max-height: calc(80vh - 200px); /* Adjust based on other elements */
+}
+
+.notification-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--whiteColor);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px var(--darkColorTransparent);
+  transition: all 0.2s ease;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  min-height: 60px; /* Ensure consistent height */
+}
+
+.notification-item:hover {
+  transform: translateY(-2px);
+  display: grid;
+  box-shadow: 0 4px 6px var(--darkColorTransparent);
+  transform: scale(1.08);
+}
+
+.notification-text {
+  flex-grow: 1;
+  font-size: 0.875rem;
+  color: var(--lightFontColor);
+  margin: 0;
+  overflow: hidden; /* Prevent text overflow */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.notification-text strong {
+  color: var(--darkFontColor);
+  font-weight: 500;
+}
+
+.notification-text em {
+  color: var(--primaryColor);
+  font-style: normal;
+}
+
+.notification-status {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.notification-status span {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.status-pending {
+  background-color: var(--warningColor);
+  color: var(--whiteColor);
+}
+
+.status-approved {
+  background-color: var(--succesColor);
+  color: var(--whiteColor);
+}
+
+.status-rejected {
+  background-color: var(--dangerColor);
+  color: var(--whiteColor);
+}
+
+.modal-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  text-align: right;
+  border-top: 1px solid var(--whiteColorTransparent);
+  flex-shrink: 0; /* Prevent footer from growing */
+}
+
+.btn-close {
+  background-color: var(--primaryColor);
+  color: var(--whiteColor);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-close:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .modal-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .modal-title {
+    font-size: 20px;
+  }
+
+  .notification-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .notification-status {
+    width: 100%;
+    justify-content: space-between;
   }
 }

@@ -3,5 +3,16 @@
     "Employees": "Mpiasa",
     "Manager" : "Mpandrindra",
     "Request": "Fangatahana",
-    "Invotory" : "Fanisana"
+    "Invotory" : "Fanisana",
+    "Card": {
+        "Card1":"Isan'ny mpampiasa",
+        "Card2":"Isan'ny vidiana",
+        "Card3":"Isan'ny fangatahana"
+    },
+    "navBar" : {
+        "Search" : "Hitady",
+        "toggleLight" : "Loko fotsy",
+        "toogleDark" : "Loko mainty"
+        
+    }
 }

@@ -10,9 +10,13 @@ export const  startDriverIntro  = () => {
       showProgress: true,
       steps: [
         { popover: { title: "Bienvenue cher administrateur!", description: `Vous êtes dans la page d'acceuil de votre application!` } },
-        { element: ".signalement", popover: { title: "Signalements des infractions", description: "Ceci est la section du signalement.", side: "left", align: "start" }},
-        { element: ".account", popover: { title: "Compte", description: "Votre compte cher administrateur.", side: "bottom", align: "start" }},
-        { element: ".statistic", popover: { title: "Statistiques des résultats", description: "Ceci est la section des statistiques.", side: "bottom", align: "start" }},
+        { element: ".menu > li:nth-child(1)", popover: { title: "Dashboard", description: "Vous êtes actuelement sur le dashboard de l'application .", side: "left", align: "start" }},
+        { element: ".menu > li:nth-child(2)", popover: { title: "Liste des utilisateurs", description: "Ceci est la section des employés utilisateurs .", side: "left", align: "start" }},
+        { element: ".menu > li:nth-child(3)", popover: { title: "Liste des gestionnaires", description: "Ceci est la section des gestionnaires utilisateurs .", side: "bottom", align: "start" }},
+        { element: ".menu > li:nth-child(5)", popover: { title: "Les demandes d'achats", description: "Ceci est la section des demandes d'achats.", side: "bottom", align: "start" }},
+        { element: ".menu > li:nth-child(6)", popover: { title: "Section des inventaires", description: "Vous pouvez vous les inventaires dans cette partie.", side: "bottom", align: "start" }},
+        { element: ".Toggle-menu", popover: { title: "Mutli-thème", description: "Vous pouvez switchez votre thème si vous voulez.", side: "bottom", align: "start" }},
+        { element: ".user-actions", popover: { title: "Compte", description: "Les notifications , votre compte et aussi la déconnexion", side: "bottom", align: "start" }},
         { element: ".language-selector", popover: { title: "Sélecteur de langue", description: "Ceci est le sélecteur de langue.", side: "bottom", align: "start" }},
       ],
       onDestroyStarted: () => {

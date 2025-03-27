@@ -4,14 +4,15 @@ import logo_app from "/App_logo.png";
 import classnames from "classnames";
 import { useTranslation } from 'react-i18next';
 import { startDriverIntro } from "../../../../utils/Driver/IntroGuide";
+import { useNavigate } from "react-router-dom";
 import "./SideNav.scss";
 
 const SideNav = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
   useEffect(() => {
-    startDriverIntro();  // Appel de la fonction pour démarrer l'intro
+    startDriverIntro();  
   }, []);
 
   const handleToggle = () => {

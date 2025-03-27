@@ -7,18 +7,24 @@ import { handleSignup } from "../../services/ApiUser";
 import { toast } from "sonner"
 import { Toaster } from "sonner";
 import { useNavigate } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
-  const [name , setName] = useState("");
-  const [lastName , setlastName] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setlastName] = useState("");
   const [role, setRole] = useState("");
   const [scan, setScan] = useState(false);
+   const [captchaValue, setCaptchaValue] = useState(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const Navigate = useNavigate();
-
+  
+  const handleCaptchaChange = (value) => {
+    setCaptchaValue(value);
+    console.log("Captcha value:", value);
+};
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -34,23 +40,29 @@ const Signup = () => {
       setIsLoading(false);
       toast.warning("Les mots de passe ne correspondent pas. Merci de reessayer")
     }
-   else {
+    else if (!captchaValue) {
+                toast.error("Checker le reCAPTCHA s'il vous plait!");
+                return;
+         }
+    else {
       handleSignup({ email, password, first_name: name, last_name: lastName, role })
         .then((data) => {
-            if (data.success) {
+          if (data.success) {
             toast.success(data.message);
             setScan(true);
-            } else {
+          } else {
             toast.error(data.message);
-            }
-            setIsLoading(false);
+          }
+          setIsLoading(false);
         })
-        localStorage.setItem("Information user", JSON.stringify({ email, name, lastName, role }));
-        Navigate("/otp-verification")
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-  };}
+      localStorage.setItem("Information user", JSON.stringify({ email, name, lastName, role }));
+      Navigate("/otp-verification")
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    };
+  }
+  
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -88,14 +100,14 @@ const Signup = () => {
   };
 
   const features = [
-      { icon: <Code size={20} />, text: "API des services d'achats" },
-        { icon: <Shield size={20} />, text: "Conformité & protection des données" },
-        { icon: <FileText size={20} />, text: "Facilitation  des gestions" },
+    { icon: <Code size={20} />, text: "API des services d'achats" },
+    { icon: <Shield size={20} />, text: "Conformité & protection des données" },
+    { icon: <FileText size={20} />, text: "Facilitation  des gestions" },
   ];
 
   return (
     <div className="page-container">
-        <Toaster/>
+      <Toaster />
       {/* Container principal */}
       <motion.div
         className="main-card"
@@ -136,7 +148,7 @@ const Signup = () => {
               <h1>Access-Bills</h1>
             </div>
             <motion.h2 variants={fadeInUp} initial="hidden" animate="visible">
-            For Company
+              For Company
             </motion.h2>
             <motion.p
               variants={fadeInUp}
@@ -144,8 +156,8 @@ const Signup = () => {
               animate="visible"
               transition={{ delay: 0.2 }}
             >
-             Portail exclusif de gestion au sein des entreprises pour
-             des achats des biens communs 
+              Portail exclusif de gestion au sein des entreprises pour
+              des achats des biens communs
             </motion.p>
           </motion.div>
 
@@ -159,7 +171,7 @@ const Signup = () => {
               className="features"
             >
               <motion.p variants={itemVariants} className="features-title">
-              Avantages et maintenabilite
+                Avantages et maintenabilite
               </motion.p>
 
               {features.map((feature, index) => (
@@ -260,7 +272,7 @@ const Signup = () => {
 
                 <motion.div variants={itemVariants} className="field">
                   <label htmlFor="name" className="label">
-                   Votre prenom
+                    Votre prenom
                   </label>
                   <div className="input-wrapper">
                     <input
@@ -349,6 +361,10 @@ const Signup = () => {
                     />
                   </div>
                 </motion.div>
+                <ReCAPTCHA
+                  sitekey="6Lc29S0qAAAAABuR00MS7tL0RgDzvoUyaejbyhrO"
+                  onChange={handleCaptchaChange}
+                />
                 <motion.div variants={itemVariants}>
                   <motion.button
                     type="submit"
@@ -401,11 +417,11 @@ const Signup = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.6 }}
             >
-                <Link to="/login">
+              <Link to="/login">
                 <p className="signup-text">
-                    Deja un compte?
+                  Deja un compte?
                 </p>
-                </Link>
+              </Link>
             </motion.div>
           </div>
         </motion.div>
