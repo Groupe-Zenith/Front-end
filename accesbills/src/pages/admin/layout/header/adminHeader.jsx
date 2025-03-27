@@ -4,12 +4,13 @@ import engFlag from "../../../../assets/images/.jpeg/engFlag.jpeg";
 import frFlag from "../../../../assets/images/.jpeg/frFlag.jpeg";
 import { Bell, User, LucideLogOut, Search } from "lucide-react";
 import "./adminHeader.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAudio } from "../../../../assets/sounds/AudioContext";
 import notifSound from "../../../../assets/sounds/notif.mp3";
 import useSocket from "../../../../services/notificationService";
 import { useTranslation } from "react-i18next";
 import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
+
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -68,6 +69,8 @@ const Header = () => {
 
   useEffect(() => {
     getAllPurchaseRequest();
+    console.log("Purchase Requests", purchaseRequests);
+    
   }, [getAllPurchaseRequest]);
 
   return (

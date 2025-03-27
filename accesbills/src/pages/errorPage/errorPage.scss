@@ -1,0 +1,36 @@
+.error-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--whiteColor);
+    text-align: center;
+  }
+  
+  .gif-image img {
+    max-width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .button-return {
+    margin-top: 20px; /* Ajouter de l'espace entre l'image et le bouton */
+    position: relative; /* Pour pouvoir déplacer le bouton sans affecter l'image */
+    bottom: 11.2rem; /* Déplacer le bouton vers le haut */
+  }
+  
+  .button-return button {
+    padding: 10px 20px;
+    background-color: var(--dangerColor);
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .button-return button:hover {
+    background-color: darkred;
+  }
+  

@@ -7,6 +7,7 @@ import MainUserPage from "../pages/user/mainUserPage";
 import ProfilePage from "../pages/user/layout/content/profil/ProfilPage";
 import NotificationsPage from "../pages/user/layout/content/notification/NotificationPage";
 import OTPVerification from "../pages/auth/OTPVerification";
+import ErrorPage from "../pages/errorPage/errorPage";
 
 function RoutesApplication() {
   return (
@@ -19,6 +20,7 @@ function RoutesApplication() {
       <Route path="/user" element={<MainUserPage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/notifications" element={<NotificationsPage />} />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
