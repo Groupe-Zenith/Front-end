@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import "./themeToggle.scss";
+import { useTranslation } from "react-i18next";
 
 const ThemeToggle = () => {
+  const {t} = useTranslation()
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ const ThemeToggle = () => {
           <Moon className="icon" size={20} />
         )}
       </div>
-      <span>{darkMode ? "Thème clair" : "Thème sombre"}</span>
+      <span>{darkMode ? t("navBar.toggleLight") : t("navBar.toogleDark")}</span>
     </button>
   );
 };

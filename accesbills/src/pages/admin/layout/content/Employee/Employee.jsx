@@ -6,12 +6,11 @@ import { handleGetUsers } from "../../../../../services/ApiUser";
 
 // Colonnes adaptées au schéma User
 const columns = [
-  { key: "first_name", label: "First Name" },
-  { key: "last_name", label: "Last Name" },
+  { key: "first_name", label: "FNom" },
+  { key: "last_name", label: "Prénom" },
   { key: "email", label: "Email" },
   { key: "role", label: "Role" },
-  { key: "is_active", label: "Active" },
-  { key: "created_at", label: "Created At" }
+  { key: "created_at", label: "Date de création", render: (row) => row.created_at.split("T")[0] }
 ];
 
 const handleRowClick = (rowData) => {
@@ -28,8 +27,11 @@ const EmployeeList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const datas = await handleGetUsers("user")
-      
-      setData(datas);
+      const formattedData = datas.map(user => ({
+        ...user,
+        created_at: user.created_at ? user.created_at.split("T")[0] : "N/A"
+      }));
+      setData(formattedData);
     };
     fetchData()
       
@@ -38,12 +40,11 @@ const EmployeeList = () => {
   return (
     <div className="Employee">
       <DataTable
-        title="Employee List"
-        description="List of users with their details"
-        searchPlaceholder="Search users..."
-        actionButtonText="Add User"
+        title="Liste des utilisateurs"
+        description="Liste des utilisateurs avec leurs details"
+        searchPlaceholder="Rechercher..."
         columns={columns}
-        data={data || []}  // Assure que data est toujours un tableau
+        data={data || []} 
         onRowClick={handleRowClick}
         onActionClick={handleActionClick}
       />

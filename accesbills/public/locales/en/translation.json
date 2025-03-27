@@ -3,5 +3,16 @@
     "Employees": "Employee",
     "Manager" : "Manager",
     "Request": "Request",
-    "Invotory" : "Invotory"
+    "Invotory" : "Invotory",
+    "Card": {
+        "Card1":"User count",
+        "Card2":"Purchase count",
+        "Card3":"Request count"
+    },
+    "navBar" : {
+        "Search" : "Search",
+        "toggleLight" : "Ligth mode",
+        "toogleDark" : "Dark mode"
+        
+    }
 }

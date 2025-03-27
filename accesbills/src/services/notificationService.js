@@ -16,7 +16,7 @@ const useSocket = () => {
     });
 
     newSocket.on("PurchaseRequest", (data) => {
-      // console.log("📦 Données des biens reçues :", data);
+      console.log("📦 Données des biens reçues :", data);
       setPurchaseRequests(data);  
     });
     
@@ -53,6 +53,7 @@ const useSocket = () => {
     if (socket) {
       socket.emit("updateStatus", { requestId, newStatus });
     }
+    
   }, [socket]);
 
   return {

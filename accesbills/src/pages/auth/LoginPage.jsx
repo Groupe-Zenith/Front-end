@@ -5,8 +5,7 @@ import { Lock, Mail, ChevronRight, Shield, Code, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { HandleLogin } from "../../services/ApiUser";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "sonner";
-import logo from "../../assets/svg/App_logo.svg";
+import { Toaster } from "sonner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +20,7 @@ const Login = () => {
     const user = await HandleLogin({ email, password });
     setIsLoading(false);
     if (user?.error) {
-      alert(user.error);
+      toast.error(user.error);
       return;
     }
     if (user.role === "admin") {
@@ -75,6 +74,7 @@ const Login = () => {
   return (
     <div className="page-container">
       {/* Container principal */}
+      <Toaster/>
       <motion.div
         className="main-card"
         initial={{ opacity: 0, y: 20 }}
