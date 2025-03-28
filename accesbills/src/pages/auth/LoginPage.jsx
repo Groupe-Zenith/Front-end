@@ -5,7 +5,7 @@ import { Lock, Mail, ChevronRight, Shield, Code, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { HandleLogin } from "../../services/ApiUser";
 import { useNavigate } from "react-router-dom";
-import { Toaster } from "sonner";
+import { Toaster , toast } from "sonner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,13 +18,20 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     const user = await HandleLogin({ email, password });
+    sessionStorage.setItem('isAuthenticated', 'true');
+    sessionStorage.setItem('userRole', user.role);
+    sessionStorage.setItem('userEmail', user.email);
+    sessionStorage.setItem('authToken', user.token);
     setIsLoading(false);
     if (user?.error) {
-      toast.error(user.error);
+      toast.error("Erreur lors de la connexion , veuilez reessayer");
       return;
     }
-    if (user.role === "admin") {
-      navigate("/dashboard");
+    else if (user.role === "admin") {
+      navigate("/admin");
+    }
+    else if (user.role === "manager"){
+      navigate("/manager");
     } else {
       navigate("/user");
     }

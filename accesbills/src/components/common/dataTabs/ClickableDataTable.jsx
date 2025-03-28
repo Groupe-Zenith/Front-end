@@ -73,15 +73,16 @@ const ClickableDataTable = ({
                     <td key={colIndex}>{item[column.key]}</td>
                   ))}
                   
-                  <td className="actions-cell">
+                  <td className="actions-cell"  style={{gap:20}} >
                     <button
                       className="icon-btn approve"
                       onClick={(e) => {
                         e.stopPropagation();
                         onApprove(item);
                       }}
+                      style={{ color:"blue",cursor:"pointer"}}
                     >
-                      <CheckCircle size={18} />
+                      En attente
                     </button>
                     
                     <button
@@ -90,8 +91,20 @@ const ClickableDataTable = ({
                         e.stopPropagation();
                         onReject(item);
                       }}
+                      style={{paddingLeft:10 , color:"green",cursor:"pointer"}}
                     >
-                      <XCircle size={18} />
+                      Recu
+                    </button>
+                    
+                    <button
+                      className="icon-btn reject"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onReject(item);
+                      }}
+                      style={{paddingLeft:10 , color:"red" , cursor:"pointer"}}
+                    >
+                      Rejeter
                     </button>
                   </td>
                 </tr>

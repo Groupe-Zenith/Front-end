@@ -9,10 +9,7 @@ import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import { useTranslation } from "react-i18next";
 import { useAudio } from "../../../../assets/sounds/AudioContext";
 import notifSound from "../../../../assets/sounds/notif.mp3";
-import socket, {
-  connectSocket,
-  getAllPurchaseRequest,
-} from "../../../../services/notificationService";
+
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -70,14 +67,6 @@ const Header = () => {
     <Link to="/" />;
   };
 
-  //socket
-  useEffect(() => {
-    connectSocket();
-    fetchPurchaseRequest();
-    // return () => {
-    //   socket.disconnect(); // Déconnecte le socket lors du démontage du composant
-    // };
-  });
 
   const fetchPurchaseRequest = () => {
     getAllPurchaseRequest();

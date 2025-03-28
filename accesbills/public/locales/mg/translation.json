@@ -14,5 +14,10 @@
         "toggleLight" : "Loko fotsy",
         "toogleDark" : "Loko mainty"
         
+    },
+    "ManagerPage" : {
+        "Product" : "Entana",
+         "Order" : "Kaomandy",
+          "Budget" : "Vola"
     }
 }

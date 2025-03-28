@@ -66,8 +66,14 @@ const Header = () => {
   };
 
   const handleConfirmLogout = () => {
+    sessionStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('userRole');
+    sessionStorage.removeItem('userEmail');
+    sessionStorage.removeItem('authToken');
+    
+    // Redirection vers le login
+    navigate("/", { replace: true });
     setModalVisible(false);
-    navigate("/");
   };
 
   const handleNotificationClick = () => {
@@ -125,14 +131,14 @@ const Header = () => {
       {modalVisible && (
         <div className="logout-modal">
           <div className="modal-content">
-            <h2>{t("Confirm Logout")}</h2>
-            <p>{t("Are you sure you want to log out?")}</p>
+            <h2>{t("Deconnexion")}</h2>
+            <p>{t("Etes vous sure de vous deconnecter?")}</p>
             <div className="modal-actions">
               <button className="btn btn-secondary" onClick={() => setModalVisible(false)}>
-                {t("Cancel")}
+                {t("Annuler")}
               </button>
               <button className="btn btn-primary" onClick={handleConfirmLogout}>
-                {t("Logout")}
+                {t("Oui")}
               </button>
             </div>
           </div>

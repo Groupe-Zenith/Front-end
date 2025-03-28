@@ -16,5 +16,10 @@
         "toggleLight" : "Thème claire",
         "toogleDark" : "Thème sombre"
         
+    },
+    "ManagerPage" : {
+        "Product" : "Produit",
+         "Order" : "Commande",
+          "Budget" : "Budget"
     }
 }
