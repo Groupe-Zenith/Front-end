@@ -1,53 +1,58 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
-import InventoryList from '../../../../../components/common/inventoryList/inventoryList';
-import "./EquipmentReportsTab.scss";
+import EquipementTabs from '../../../../../components/common/dataTabsForEquipement/equipementDataTabs';
+import bienService from '../../../../../services/bienService';
+import { AlertCircle } from 'lucide-react'; 
+import './EquipmentReportsTab.scss';
 
 export default function EquipmentReportsTab() {
-  const [inventoryData, setInventoryData] = useState([
-    {
-      id: 'EQ-1001',
-      name: 'Ordinateur Portable Dell XPS',
-      category: 'Informatique',
-      quantity: 5,
-      condition: 'new',
-      purchase_date: '2023-05-15',
-      order_id: 'CMD-2023-042',
-      current_location: 'Bureau 101',
-      notes: 'Neuf, jamais utilisé'
-    },
-    {
-      id: 'EQ-2045',
-      name: 'Écran 24" Samsung',
-      category: 'Informatique',
-      quantity: 3,
-      condition: 'used',
-      purchase_date: '2022-11-10',
-      order_id: 'CMD-2022-187',
-      current_location: 'Salle de conférence',
-      notes: 'Bon état général'
-    },
-    {
-      id: 'EQ-3012',
-      name: 'Clavier sans fil Logitech',
-      category: 'Périphérique',
-      quantity: 2,
-      condition: 'damaged',
-      purchase_date: '2023-01-20',
-      order_id: 'CMD-2023-015',
-      current_location: 'Entrepôt',
-      notes: 'Certaines touches ne fonctionnent pas'
-    }
-  ]);
-
   const [searchTerm, setSearchTerm] = useState('');
+  const { getAllBiens, inventoryData } = bienService();
 
-  const filteredInventory = inventoryData.filter(item => 
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.current_location.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const columns = [
+    { key: 'labelBien', label: 'Nom' },
+    { key: 'number', label: 'Nombre' },
+    { key: 'state', label: 'Etat' },
+    { key: 'description', label: 'Description' },
+    { key: 'numberdamaged', label: 'Nombre de dommage' },
+    { key: 'numberlost', label: 'Nombre de perte' },
+  ];
+
+  const filteredData = inventoryData.filter((item) => {
+    return columns.some((column) =>
+      item[column.key]
+        ? item[column.key].toString().toLowerCase().includes(searchTerm.toLowerCase())
+        : false
+    );
+  });
+
+  // Traite les cellules vides pour chaque item
+  const handleEmptyCells = (item) => {
+    const updatedItem = { ...item }; // Crée une copie de l'item pour ne pas le modifier directement
+    columns.forEach((column) => {
+      const value = item[column.key];
+      if (value === null || value === undefined || value === '') {
+        updatedItem[column.key] = <AlertCircle className="icon" />; // Remplace la valeur vide par "Aucun"
+      }
+    });
+    return updatedItem;
+  };
+  
+
+  const handleView = (item) => {
+    console.log('Voir', item);
+    // Ajoutez votre logique pour l'action "View"
+  };
+
+  const handleApprove = (item) => {
+    console.log('Approuver', item);
+    // Ajoutez votre logique pour l'action "Approve"
+  };
+
+  const handleReject = (item) => {
+    console.log('Rejeter', item);
+    // Ajoutez votre logique pour l'action "Reject"
+  };
 
   return (
     <div className="equipment-reports">
@@ -63,8 +68,17 @@ export default function EquipmentReportsTab() {
         </div>
       </div>
 
-      <div className="inventory-section">
-        <InventoryList inventoryItems={filteredInventory} />
+      <div className="data-table-section">
+        <EquipementTabs
+          title="Rapports sur les équipements"
+          description="Liste des équipements disponibles"
+          searchPlaceholder="Rechercher un équipement"
+          columns={columns}
+          data={filteredData.map(item => handleEmptyCells(item))}
+          onView={handleView}
+          onApprove={handleApprove}
+          onReject={handleReject}
+        />
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ import useSocket from "../../../../../services/notificationService";
 
 const Dashboard = () => {
   const { getAllPurchaseRequest, purchaseRequests } = useSocket();
+  
+  
   const [lineData, setLineData] = useState({
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aout", "Sept", "Oct", "Nov", "Dec"],
     datasets: [
@@ -67,7 +69,7 @@ const lineOptions = {
 ];
 
 useEffect(() => {
-  getAllPurchaseRequest();
+  getAllPurchaseRequest('pending');
 }, [getAllPurchaseRequest]);
 
 useEffect(() => {

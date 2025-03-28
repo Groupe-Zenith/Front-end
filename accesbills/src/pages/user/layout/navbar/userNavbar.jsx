@@ -34,8 +34,8 @@ export default function UserNavbar() {
               <User className="icon" />
             </div>
             <div className="dropdown">
-              <p className="user-name">{userRole.first_name}</p>
-              <p className="user-email">{userRole.email}</p>
+              <p className="user-name">Tsutsu</p>
+              <p className="user-email">adh</p>
               <hr />
               <Link to="/profile" className="dropdown-item">
                 <User className="icon" /> Profile

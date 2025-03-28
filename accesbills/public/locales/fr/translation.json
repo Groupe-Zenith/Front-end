@@ -4,6 +4,8 @@
     "Manager" : "Gestionnaire",
     "Request": "Demandes achats",
     "Invotory" : "Inventaire",
+    "Product" : "Produits",
+    "Order" : "Commandes",
    "Card": {
         "Card1":"Nombre d'utilisateur",
         "Card2":"Nombre d'achats",

@@ -36,7 +36,7 @@ const NewEquipmentReportModal = ({ isOpen, onClose, onSubmit }) => {
         ...prev,
         image: file
       }));
-
+      
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewImage(reader.result);
