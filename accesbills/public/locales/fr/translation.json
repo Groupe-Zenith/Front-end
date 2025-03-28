@@ -5,5 +5,16 @@
     "Request": "Demandes achats",
     "Invotory" : "Inventaire",
     "Product" : "Produits",
-    "Order" : "Commandes"
+    "Order" : "Commandes",
+   "Card": {
+        "Card1":"Nombre d'utilisateur",
+        "Card2":"Nombre d'achats",
+        "Card3":"Nombre des demandes"
+    },
+    "navBar" : {
+        "Search" : "Rechercher",
+        "toggleLight" : "Thème claire",
+        "toogleDark" : "Thème sombre"
+        
+    }
 }

@@ -1,32 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "../../../../../components/common/dataTabs/DataTable"; 
 import "./Employee.scss";
-const columns = [
-  { key: "badgeNumber", label: "Badge Number" },
-  { key: "firstName", label: "Name" },
-  { key: "lastName", label: "Last Name" },
-  { key: "mobile", label: "Mobile" },
-  { key: "email", label: "Email" },
-  { key: "role", label: "Role" }
-];
 
-const data = [
-  {
-    badgeNumber: "12345",
-    firstName: "John",
-    lastName: "Doe",
-    mobile: "+1234567890",
-    email: "john.doe@example.com",
-    role: "Admin"
-  },
-  {
-    badgeNumber: "67890",
-    firstName: "Jane",
-    lastName: "Smith",
-    mobile: "+0987654321",
-    email: "jane.smith@example.com",
-    role: "User"
-  }
+import { handleGetUsers } from "../../../../../services/ApiUser";
+
+// Colonnes adaptées au schéma User
+const columns = [
+  { key: "first_name", label: "FNom" },
+  { key: "last_name", label: "Prénom" },
+  { key: "email", label: "Email" },
+  { key: "role", label: "Role" },
+  { key: "created_at", label: "Date de création", render: (row) => row.created_at.split("T")[0] }
 ];
 
 const handleRowClick = (rowData) => {
@@ -38,15 +22,29 @@ const handleActionClick = () => {
 };
 
 const EmployeeList = () => {
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const datas = await handleGetUsers("user")
+      const formattedData = datas.map(user => ({
+        ...user,
+        created_at: user.created_at ? user.created_at.split("T")[0] : "N/A"
+      }));
+      setData(formattedData);
+    };
+    fetchData()
+      
+  }, []);
+
   return (
     <div className="Employee">
       <DataTable
-        title="Employee List"
-        description="List of users with their details"
-        searchPlaceholder="Search users..."
-        actionButtonText="Add User"
+        title="Liste des utilisateurs"
+        description="Liste des utilisateurs avec leurs details"
+        searchPlaceholder="Rechercher..."
         columns={columns}
-        data={data}
+        data={data || []} 
         onRowClick={handleRowClick}
         onActionClick={handleActionClick}
       />

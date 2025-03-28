@@ -2,15 +2,38 @@ import { useState } from 'react';
 import { User, Mail, Phone, Briefcase, Users } from 'lucide-react';
 import UserNavbar from '../../navbar/UserNavbar';
 import './ProfilePage.scss';
+import { handleUpdateUser } from '../../../../../services/ApiUser';
+import {toast , Toaster} from "sonner"
 
 export default function ProfilePage() {
+  const [image, setImage] = useState(null);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(URL.createObjectURL(file)); // Convertir en URL pour prévisualisation
+    }
+  };
+  const handleDragOver = (e) => {
+    e.preventDefault(); // Empêcher le comportement par défaut
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0]; // Récupérer le fichier
+    if (file) {
+      setImage(URL.createObjectURL(file));
+    }
+  };
+  const userRole = JSON.parse(localStorage.getItem("user")) || {};
   const [userData, setUserData] = useState({
-    firstName: 'Mumu',
-    lastName: 'Muriella',
-    email: 'muriella@example.com',
-    phone: '+33 6 12 34 56 78',
-    role: 'Utilisateur simple',
+    firstName: userRole.first_name || '',
+    lastName: userRole.last_name || '',
+    email: userRole.email || '',
+    phone: userRole.tel || '',
+    role: userRole.role || '',
+    profil: userRole.photo || ''
   });
+
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -22,16 +45,40 @@ export default function ProfilePage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsEditing(false);
-    console.log('Données mises à jour:', userData);
+    try {
+      const updatedUser = await handleUpdateUser({
+        userId: userRole.id, // Assure-toi que `userRole.id` est bien défini
+        email: userData.email,
+        first_name: userData.firstName,
+        last_name: userData.lastName,
+        role: userData.role,
+        tel: userData.phone,
+        photo: userData.profil
+      });
+  
+      if (updatedUser && updatedUser.status === "success") { // Vérifier le statut
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        setIsEditing(false);
+        toast.success("Mise à jour réussie !");
+      } else {
+        console.log("Réponse de l'API:", updatedUser); // Afficher la réponse pour débogage
+        toast.error("Erreur lors de la mise à jour : " + (updatedUser?.message || "Inconnu"));
+      }
+    } catch (error) {
+      console.error("Erreur :", error);
+      toast.error("Erreur lors de la mise à jour de l'utilisateur.");
+    }
   };
+  
+  
+  
 
   return (
     <div className="profile-page">
+      <Toaster/>
       <UserNavbar />
-      
       <main className="profile-container">
         <div className="profile-header">
           <h1>Mon Profil</h1>
@@ -61,16 +108,49 @@ export default function ProfilePage() {
         </div>
 
         <div className="profile-content">
-          <div className="avatar-section">
-            <div className="avatar">
-              <User className="icon" size={48} />
-            </div>
-            {isEditing && (
-              <button className="change-avatar">
-                Changer la photo
-              </button>
-            )}
-          </div>
+        <div className="avatar-section">
+      <div
+        className="avatar"
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        style={{
+          width: "100px",
+          height: "100px",
+          borderRadius: "50%",
+          border: "2px dashed #ccc",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
+          overflow: "hidden",
+          background : 'none'
+        }}
+      >
+        {image ? (
+          <img src={image} alt="Profil" className="profile-image" style={{ width: "80%", height: "80%", objectFit: "cover" }}/>
+        ) : (
+          <User className="icon" size={48} />
+        )}
+      </div>
+
+      {isEditing && (
+        <>
+          <button
+            className="change-avatar"
+            onClick={() => document.getElementById("fileInput").click()}
+          >
+            Changer la photo
+          </button>
+          <input
+            type="file"
+            id="fileInput"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleFileChange}
+          />
+        </>
+      )}
+    </div>
 
           <form className="profile-form">
             <div className="form-row">

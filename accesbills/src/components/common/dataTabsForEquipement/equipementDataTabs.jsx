@@ -1,10 +1,8 @@
-import { useState } from 'react';
-import { CheckCircle, XCircle } from 'lucide-react';
-import { MdOutlineDownloading } from "react-icons/md";
+import { AlertTriangle } from 'lucide-react';
 import PropTypes from 'prop-types';
-import './DataTable.scss';
+import './equipementDataTabs.scss';
 
-const DataTable = ({
+const EquipementTabs = ({
   title,
   description,
   searchPlaceholder,
@@ -16,18 +14,6 @@ const DataTable = ({
   onApprove,
   onReject
 }) => {
-  // État pour gérer la recherche
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // Filtrer les données en fonction du terme de recherche
-  const filteredData = data.filter(item => 
-    columns.some(column => 
-      String(column.key.split('.').reduce((acc, key) => acc?.[key], item) || '')
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
-    )
-  );
-
   return (
     <div className="data-table-container">
       <div className="header-section">
@@ -37,13 +23,9 @@ const DataTable = ({
       <div className="content-section">
         <div className="controls-wrapper">
           <div className="search-container">
-            {/* Champ de recherche */}
-            <input 
-              type="text"
+            <input
               placeholder={searchPlaceholder}
               className="search-input"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           {actionButtonText && (
@@ -52,7 +34,7 @@ const DataTable = ({
             </button>
           )}
         </div>
-        
+
         <div className="table-container">
           <table className="data-table">
             <thead>
@@ -60,39 +42,26 @@ const DataTable = ({
                 {columns.map((column, index) => (
                   <th key={index}>{column.label}</th>
                 ))}
-                <th>Actions</th> 
+                <th>Actions</th> {/* Colonne pour les boutons */}
               </tr>
             </thead>
             <tbody>
-  {filteredData.length > 0 ? (
-    filteredData.map((item, rowIndex) => (
-      <tr key={rowIndex}>
-        {columns.map((column, colIndex) => {
-          const value = column.key.split('.').reduce((acc, key) => acc?.[key], item);
-          return <td key={colIndex}>{value}</td>;
-        })}
-        <td>
-          <button className="view-btn" onClick={() => onView(item)}>
-            <MdOutlineDownloading />
-          </button>
-          <button className="approve-btn" onClick={() => onApprove(item)}>
-            <CheckCircle />
-          </button>
-          <button className="reject-btn" onClick={() => onReject(item)}>
-            <XCircle />
-          </button>
-        </td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan={columns.length + 1} className="no-data">
-        Aucun résultat trouvé
-      </td>
-    </tr>
-  )}
-</tbody>
-
+              {data.map((item, index) => (
+                <tr key={index}>
+                  {columns.map((column) => (
+                    <td key={column.key}>{item[column.key]}</td>
+                  ))}
+                  <td className="item-cell actions" data-label="Actions">
+                    <button
+                      className="report-button"
+                      onClick={() => onReject(item)} // Example action
+                    >
+                      <AlertTriangle size={16} /> Signaler
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
@@ -100,7 +69,7 @@ const DataTable = ({
   );
 };
 
-DataTable.propTypes = {
+EquipementTabs.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   searchPlaceholder: PropTypes.string,
@@ -118,7 +87,7 @@ DataTable.propTypes = {
   onReject: PropTypes.func
 };
 
-DataTable.defaultProps = {
+EquipementTabs.defaultProps = {
   description: '',
   searchPlaceholder: 'Rechercher...',
   actionButtonText: null,
@@ -128,4 +97,4 @@ DataTable.defaultProps = {
   onReject: () => {}
 };
 
-export default DataTable;
+export default EquipementTabs;

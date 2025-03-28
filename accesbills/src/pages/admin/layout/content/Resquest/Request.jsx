@@ -1,32 +1,16 @@
-import React from "react";
+
+import React, { useState, useEffect } from "react";
 import DataTable from "../../../../../components/common/dataTabs/DataTable";
+import useSocket from "../../../../../services/notificationService";
+
 
 const columns = [
-  { key: "badgeNumber", label: "Nom d'utilisateur" },
-  { key: "firstName", label: "Article demande" },
-  { key: "lastName", label: "Nombre" },
-  { key: "mobile", label: "Prix estimé" },
-  { key: "email", label: "Description" },
-  { key: "role", label: "Date du demande" }
-];
-
-const data = [
-  {
-    badgeNumber: "54321",
-    firstName: "Alice",
-    lastName: "Johnson",
-    mobile: "+1122334455",
-    email: "alice.johnson@example.com",
-    role: "Manager"
-  },
-  {
-    badgeNumber: "98765",
-    firstName: "Bob",
-    lastName: "Williams",
-    mobile: "+5566778899",
-    email: "bob.williams@example.com",
-    role: "Manager"
-  }
+  { key: "user_id.first_name", label: "Nom d'utilisateur" },
+  { key: "item_name", label: "Article demande" },
+  { key: "quantity", label: "Nombre" },
+  { key: "prix", label: "Prix estimé" },
+  { key: "reason", label: "Description" },
+  { key: "createdAt", label: "Date du demande" }
 ];
 
 const handleRowClick = (rowData) => {
@@ -38,6 +22,12 @@ const handleActionClick = () => {
 };
 
 const RequestList = () => {
+  const { getAllPurchaseRequest ,purchaseRequests} = useSocket();
+
+  useEffect(() => {
+    getAllPurchaseRequest("pending");
+  }, [getAllPurchaseRequest]);
+
   return (
     <div className="Request">
       <DataTable
@@ -45,7 +35,7 @@ const RequestList = () => {
         description="Liste des demandes avec leurs détails"
         searchPlaceholder="Recherche une demande..."
         columns={columns}
-        data={data}
+        data={purchaseRequests}
         onRowClick={handleRowClick}
         onActionClick={handleActionClick}
       />
