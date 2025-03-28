@@ -25,7 +25,7 @@ const RequestList = () => {
   const { getAllPurchaseRequest ,purchaseRequests} = useSocket();
 
   useEffect(() => {
-    getAllPurchaseRequest();
+    getAllPurchaseRequest("pending");
   }, [getAllPurchaseRequest]);
 
   return (

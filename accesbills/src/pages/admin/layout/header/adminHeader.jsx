@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import ThemeToggle from "../../../../components/common/switchMode/themeToggle";
 import "./adminHeader.scss";
 
+
 const Header = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
@@ -26,7 +27,8 @@ const Header = () => {
   const languageSelectorRef = useRef(null);
   const { audioRef } = useAudio();
 
-  const { getAllPurchaseRequest, purchaseRequests } = useSocket();
+  const { getAllPurchaseRequest,updateStatus, purchaseRequests } = useSocket();
+
   console.log(purchaseRequests);
   
   const languages = [
@@ -73,7 +75,9 @@ const Header = () => {
   };
 
   useEffect(() => {
-    getAllPurchaseRequest();
+    getAllPurchaseRequest('pending');
+    console.log("Purchase Requests", purchaseRequests);
+    
   }, [getAllPurchaseRequest]);
 
   return (
@@ -143,14 +147,18 @@ const Header = () => {
         {purchaseRequests.map((request, index) => (
           <li key={index} className="notification-item">
             <h3 className="notification-text">
-              {t("Demande d'achat venant de")}: <strong>{request.user_id.email}</strong>
+              <b>{t("Venant de")}</b>: <strong>{request.user_id.email}</strong>
             </h3>
             <p className="notification-text">
               {t("Détails")}: <em>{request.item_name}</em>
             </p>
-            <p className="notification-status">
-              {t("Status")}: <span className={`status-${request.status.toLowerCase()}`}>{request.status}</span>
+            <p className="notification-status" onClick={()=>updateStatus(request._id,"approved")}>
+              {t("Action")}: <span className={`status-${request.status.toLowerCase()}`} style={{ backgroundColor: 'green' }}>Accepter</span>
             </p>
+            <p className="notification-status" onClick={()=>updateStatus(request._id,"rejected")}>
+              {t("Action")}: <span className={`status-${request.status.toLowerCase()}`} style={{ backgroundColor: 'red' }}>Rejeter</span>
+            </p>
+
           </li>
         ))}
       </ul>

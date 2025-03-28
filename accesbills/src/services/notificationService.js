@@ -16,7 +16,7 @@ const useSocket = () => {
     });
 
     newSocket.on("PurchaseRequest", (data) => {
-      // console.log("📦 Données des biens reçues :", data);
+      console.log("📦 Données des biens reçues :", data);
       setPurchaseRequests(data);  
     });
     
@@ -35,9 +35,9 @@ const useSocket = () => {
     }
   }, [socket]);
 
-  const getAllPurchaseRequest = useCallback(() => {
+  const getAllPurchaseRequest = useCallback((status) => {
     if (socket) {
-      socket.emit("getAllPurchaseRequest");
+      socket.emit("getAllPurchaseRequest",status);
       
     }
   }, [socket]);
@@ -49,10 +49,18 @@ const useSocket = () => {
     }
   }, [socket]);
 
+  const updateStatus = useCallback((requestId, newStatus) => {
+    if (socket) {
+      socket.emit("updateStatus", { requestId, newStatus });
+    }
+    
+  }, [socket]);
+
   return {
     createPurchaseRequest,
     getAllPurchaseRequest,
     getPurchaseRequestByIdUser,
+    updateStatus,
     purchaseRequests,
     purchaseRequestsByIdUser
   };
