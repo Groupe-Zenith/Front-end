@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from 'react';
 import { Search } from 'lucide-react';
 import InventoryList from '../../../../../components/common/inventoryList/inventoryList';

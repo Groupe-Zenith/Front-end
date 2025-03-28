@@ -142,9 +142,9 @@ const Header = () => {
       <ul className="notification-list">
         {purchaseRequests.map((request, index) => (
           <li key={index} className="notification-item">
-            <h3 className="notification-text">
+            {/* <h3 className="notification-text">
               {t("Demande d'achat venant de")}: <strong>{request.user_id.email}</strong>
-            </h3>
+            </h3> */}
             <p className="notification-text">
               {t("Détails")}: <em>{request.item_name}</em>
             </p>
