@@ -70,7 +70,7 @@ const lineOptions = {
 
 useEffect(() => {
   getAllPurchaseRequest('pending');
-}, []);
+}, [getAllPurchaseRequest]);
 
 useEffect(() => {
   if (purchaseRequests.length > 0) {
