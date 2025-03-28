@@ -3,5 +3,7 @@
     "Employees": "Employés",
     "Manager" : "Gestionnaire",
     "Request": "Demandes achats",
-    "Invotory" : "Inventaire"
+    "Invotory" : "Inventaire",
+    "Product" : "Produits",
+    "Order" : "Commandes"
 }

@@ -1,0 +1,157 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.modal-container {
+  background-color: var(--whiteColor);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px var(--darkColorTransparent);
+  width: 90%;
+  max-width: 800px; // Augmentation de la largeur maximale
+  overflow: visible; // Désactivation du défilement
+  max-height: none; // Hauteur maximale adaptée à l'écran
+  display: flex;
+  flex-direction: column;
+
+  &.with-preview {
+    max-width: 1000px; // Largeur encore plus grande si prévisualisation
+  }
+}
+
+.form-preview-container {
+  display: flex;
+  gap: 2rem;
+  padding: 1.5rem;
+  overflow: visible; // Désactivation du défilement interne
+  flex: 1;
+  min-height: 0;
+}
+
+.modal-form {
+  flex: 1;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // Répartition de l'espace
+  overflow: visible;
+
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    flex-wrap: nowrap;
+    flex-shrink: 0; // Empêche le rétrécissement
+
+    .form-group {
+      flex: 1;
+      min-height: 80px; // Hauteur minimale fixe
+    }
+  }
+}
+
+.image-preview-sidebar {
+  flex: 0 0 300px;
+  padding-left: 2rem;
+  border-left: 1px solid #eee;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .preview-image {
+    max-height: 200px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+}
+
+// Adaptation responsive
+@media (max-width: 768px) {
+  .modal-container {
+    max-width: 95vw; // Utilisation de la largeur de l'écran
+    max-height: 95vh; // Hauteur presque totale
+    
+    &.with-preview {
+      max-width: 95vw;
+    }
+  }
+
+  .form-preview-container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .modal-form {
+    min-width: auto;
+    
+    .form-row {
+      flex-wrap: wrap; // Permet le retour à la ligne sur mobile
+    }
+  }
+
+  .image-preview-sidebar {
+    border-left: none;
+    border-top: 1px solid var(--greyColor);
+    padding-top: 1.5rem;
+    
+  .preview-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid #eee;
+  }
+  
+  .file-name {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    word-break: break-all;
+  }
+  
+  .remove-image-button {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    &:hover {
+      background: #c82333;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-container.with-preview {
+    max-width: 90%;
+  }
+  
+  .form-preview-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .image-preview-sidebar {
+    padding-left: 0;
+    padding-top: 1.5rem;
+    border-left: none;
+    border-top: 1px solid #eee;
+  }
+}}
