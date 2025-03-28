@@ -9,6 +9,7 @@ import ProfilePage from "../pages/user/layout/content/profil/ProfilPage";
 import NotificationsPage from "../pages/user/layout/content/notification/NotificationPage";
 import OTPVerification from "../pages/auth/OTPVerification";
 import ErrorPage from "../pages/errorPage/errorPage";
+import ProtectedRoute from "../config/routes/protectedRoute/protectRoutes"
 
 function RoutesApplication() {
   return (
@@ -17,11 +18,49 @@ function RoutesApplication() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/otp-verification" element={<OTPVerification />} />
-      <Route path="/dashboard/*" element={<AdminPage />} /> 
-      <Route path="/manager-dashboard/*" element={<ManagerPage/>}/>    
-      <Route path="/user" element={<MainUserPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/notifications" element={<NotificationsPage />} />
+      
+      {/* Protected Routes */}
+      <Route 
+        path="/admin/*" 
+        element={
+          <ProtectedRoute allowedRoles={['admin', 'admin_principal']}>
+            <AdminPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/manager/*" 
+        element={
+          <ProtectedRoute allowedRoles={['manager']}>
+            <ManagerPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/user/*" 
+        element={
+          <ProtectedRoute allowedRoles={['user', 'admin', 'manager']}>
+            <MainUserPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/user/profile" 
+        element={
+          <ProtectedRoute allowedRoles={['user', 'admin', 'manager']}>
+            <ProfilePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/user/notifications" 
+        element={
+          <ProtectedRoute allowedRoles={['user', 'admin', 'manager']}>
+            <NotificationsPage />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

@@ -14,5 +14,10 @@
         "toggleLight" : "Ligth mode",
         "toogleDark" : "Dark mode"
         
+    },
+    "ManagerPage" : {
+        "Product" : "Product",
+         "Order" : "Order",
+          "Budget" : "Budget"
     }
 }

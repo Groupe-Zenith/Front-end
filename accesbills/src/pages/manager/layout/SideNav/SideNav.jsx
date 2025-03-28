@@ -1,29 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { LuLayoutDashboard, LuUser, LuUserCheck, LuBox, LuMenu , LuShoppingBag } from "react-icons/lu"; 
+import {  LuUser, LuUserCheck, LuBox, LuMenu , LuShoppingBag } from "react-icons/lu"; 
 import logo_app from "/App_logo.png";
 import classnames from "classnames";
 import { useTranslation } from 'react-i18next';
-import { startDriverIntro } from "../../../../utils/Driver/IntroGuide";
 import "./SideNav.scss";
 
 const SideNav = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    startDriverIntro();  // Appel de la fonction pour démarrer l'intro
-  }, []);
-
   const handleToggle = () => {
     setCollapsed(!collapsed);
   };
 
   const menus = [
-    { title: t("Dashboard"), icon: <LuLayoutDashboard />, link: "/dashboard" },
-    { title: t("Product"), icon: <LuUser />, link: "/manager-dashboard/productlist" },//employee-account
-    { title: t("Order"), icon: <LuUserCheck />, link: "/manager-dashboard/commandlist" },
-    {title: t("Financial"), icon: <LuShoppingBag />, link: "/manager-dashboard/financial" },
-    { title: t("In Depth"), icon: <LuBox />, link: "//manager-dashboard/indepth" }
+    { title: t("ManagerPage.Product"), icon: <LuUser />, link: "/manager/productlist" },
+    { title: t("ManagerPage.Order"), icon: <LuUserCheck />, link: "/manager/commandlist" },
+    {title: t("ManagerPage.Budget"), icon: <LuShoppingBag />, link: "/manager/financial" },
   ];
 
   return (

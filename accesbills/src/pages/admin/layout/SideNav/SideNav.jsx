@@ -4,13 +4,12 @@ import logo_app from "/App_logo.png";
 import classnames from "classnames";
 import { useTranslation } from 'react-i18next';
 import { startDriverIntro } from "../../../../utils/Driver/IntroGuide";
-import { useNavigate } from "react-router-dom";
 import "./SideNav.scss";
 
 const SideNav = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
-  const navigate = useNavigate();
+ 
   useEffect(() => {
     startDriverIntro();  
   }, []);
@@ -20,11 +19,11 @@ const SideNav = () => {
   };
 
   const menus = [
-    { title: t("Dashboard"), icon: <LuLayoutDashboard />, link: "/dashboard" },
-    { title: t("Employees"), icon: <LuUser />, link: "/dashboard/employee-account" },
-    { title: t("Manager"), icon: <LuUserCheck />, link: "/dashboard/manager-account" },
-    {title: t("Request"), icon: <LuShoppingBag />, link: "/dashboard/request-list" },
-    { title: t("Invotory"), icon: <LuBox />, link: "/dashboard/inventory" }
+    { title: t("Dashboard"), icon: <LuLayoutDashboard />, link: "/admin" },
+    { title: t("Employees"), icon: <LuUser />, link: "/admin/employee-account" },
+    { title: t("Manager"), icon: <LuUserCheck />, link: "/admin/manager-account" },
+    {title: t("Request"), icon: <LuShoppingBag />, link: "/admin/request-list" },
+    { title: t("Invotory"), icon: <LuBox />, link: "/admin/inventory" }
   ];
 
   return (
